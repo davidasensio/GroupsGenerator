@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GroupsGenerator</string>
+    <string name="up_action_top_bar">Up to previous screen</string>
 </resources>

@@ -14,13 +14,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.handysparksoft.groupsgenerator.model.getGroups
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
-import com.handysparksoft.groupsgenerator.ui.common.Thumb
+import com.handysparksoft.groupsgenerator.ui.shared.ArrowBackIcon
+import com.handysparksoft.groupsgenerator.ui.shared.Thumb
 
 @Composable
-fun DetailScreen(id: Int) {
-    val group = remember { getGroups().first() { it.id == id } }
+fun DetailScreen(groupId: Int, onUpClick: () -> Unit) {
+    val group = remember { getGroups().first() { it.id == groupId } }
 
-    Scaffold(topBar = { TopAppBar(title = { Text(group.name) }) }) { padding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(group.name) },
+                navigationIcon = { ArrowBackIcon(onUpClick) })
+        },
+    ) { padding ->
         Thumb(group = group, modifier = Modifier.padding(padding))
     }
 
@@ -28,7 +35,7 @@ fun DetailScreen(id: Int) {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Detail Screen $id", style = MaterialTheme.typography.h4)
+        Text(text = "Detail Screen $groupId", style = MaterialTheme.typography.h4)
     }
 }
 
@@ -36,6 +43,9 @@ fun DetailScreen(id: Int) {
 @Composable
 fun DetailScreenPreview() {
     GroupsGeneratorApp {
-        DetailScreen(1)
+        DetailScreen(
+            groupId = 1,
+            onUpClick = {}
+        )
     }
 }

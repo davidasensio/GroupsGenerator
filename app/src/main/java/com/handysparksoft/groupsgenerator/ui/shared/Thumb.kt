@@ -1,4 +1,4 @@
-package com.handysparksoft.groupsgenerator.ui.common
+package com.handysparksoft.groupsgenerator.ui.shared
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

@@ -12,13 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.handysparksoft.groupsgenerator.model.Group
-import com.handysparksoft.groupsgenerator.ui.common.Thumb
+import com.handysparksoft.groupsgenerator.ui.shared.Thumb
 
 @Composable
-fun GroupItem(group: Group, navController: NavController?) {
-    Column(modifier = Modifier.clickable { navController?.navigate("detail/${group.id}") }) {
+fun GroupItem(group: Group, onClick: () -> Unit) {
+    Column(modifier = Modifier.clickable(onClick = onClick)) {
         Thumb(group)
         Title(group)
     }
