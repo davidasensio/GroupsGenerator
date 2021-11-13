@@ -10,11 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.handysparksoft.groupsgenerator.model.getGroups
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavController) {
     Scaffold(
         topBar = { MainAppBar() }
     ) {
@@ -24,7 +25,7 @@ fun MainScreen() {
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             items(getGroups()) { group ->
-                GroupItem(group)
+                GroupItem(group, navController)
             }
         }
     }
@@ -34,8 +35,6 @@ fun MainScreen() {
 @Composable
 fun MainScreenPreview() {
     GroupsGeneratorApp {
-        MainScreen()
+//        MainScreen()
     }
 }
-
-
