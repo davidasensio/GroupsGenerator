@@ -1,6 +1,8 @@
 package com.handysparksoft.groupsgenerator.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -12,21 +14,31 @@ fun Navigation() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = NavItem.Main.route) {
-        composable(NavItem.Main.route) {
+        composable(NavItem.Main) {
             MainScreen(onGroupClick = { group ->
                 navController.navigate(NavItem.Detail.createNavRoute(group.id))
             })
         }
-        composable(
-            route = NavItem.Detail.route,
-            arguments = NavItem.Detail.args
-        ) { backStackEntry ->
-            val id = backStackEntry.arguments?.getInt(NavArg.GroupId.key)
-            requireNotNull(
-                value = id,
-                lazyMessage = { "Required value should be not null. Detail screen needs an id" }
+        composable(NavItem.Detail) { backStackEntry ->
+            DetailScreen(
+                groupId = backStackEntry.findArg(NavArg.GroupId.key),
+                onUpClick = { navController.popBackStack() }
             )
-            DetailScreen(groupId = id, onUpClick = { navController.popBackStack() })
         }
     }
 }
+
+private fun NavGraphBuilder.composable(
+    navItem: NavItem,
+    content: @Composable (NavBackStackEntry) -> Unit
+) {
+    composable(route = navItem.route, arguments = navItem.args) {
+        content(it)
+    }
+}
+
+private inline fun <reified T> NavBackStackEntry.findArg(key: String): T {
+    val value = arguments?.get(key)
+    requireNotNull(value = value)
+    return value as T
+ }
