@@ -21,8 +21,8 @@ fun MainScreen(onGroupClick: (Group) -> Unit) {
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(4.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            contentPadding = PaddingValues(24.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             items(getGroups()) { group ->
                 GroupItem(group, onClick = { onGroupClick(group) })
