@@ -19,7 +19,7 @@ sealed class NavItem(
 
     object Main : NavItem("main")
     object Detail : NavItem("detail", navArgs = listOf(NavArg.GroupId)) {
-        fun createNavRoute(groupId: Int) = "$baseRoute/$groupId"
+        fun createNavRoute(aListId: Int) = "$baseRoute/$aListId"
     }
 }
 

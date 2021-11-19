@@ -15,13 +15,13 @@ fun Navigation() {
 
     NavHost(navController = navController, startDestination = NavItem.Main.route) {
         composable(NavItem.Main) {
-            MainScreen(onGroupClick = { group ->
-                navController.navigate(NavItem.Detail.createNavRoute(group.id))
+            MainScreen(onAListClick = { aList ->
+                navController.navigate(NavItem.Detail.createNavRoute(aList.id))
             })
         }
         composable(NavItem.Detail) { backStackEntry ->
             DetailScreen(
-                groupId = backStackEntry.findArg(NavArg.GroupId.key),
+                aListId = backStackEntry.findArg(NavArg.GroupId.key),
                 onUpClick = { navController.popBackStack() }
             )
         }
