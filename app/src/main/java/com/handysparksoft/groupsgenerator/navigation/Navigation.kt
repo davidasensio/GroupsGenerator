@@ -16,9 +16,11 @@ fun Navigation(detailViewModel: DetailViewModel) {
 
     NavHost(navController = navController, startDestination = NavItem.Main.route) {
         composable(NavItem.Main) {
-            MainScreen(onAListClick = { aList ->
-                navController.navigate(NavItem.Detail.createNavRoute(aList.id))
-            })
+            MainScreen(
+                onAListClick = { aList ->
+                    navController.navigate(NavItem.Detail.createNavRoute(aList.id))
+                }
+            )
         }
         composable(NavItem.Detail) { backStackEntry ->
             detailViewModel.aListId = backStackEntry.findArg(NavArg.GroupId.key)
@@ -43,4 +45,4 @@ private inline fun <reified T> NavBackStackEntry.findArg(key: String): T {
     val value = arguments?.get(key)
     requireNotNull(value = value)
     return value as T
- }
+}

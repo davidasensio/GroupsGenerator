@@ -67,7 +67,8 @@ fun DetailScreen(viewModel: DetailViewModel, onUpClick: () -> Unit) {
         topBar = {
             TopAppBar(
                 title = { Text(viewModel.listName) },
-                navigationIcon = { ArrowBackIcon(onUpClick) })
+                navigationIcon = { ArrowBackIcon(onUpClick) }
+            )
         },
     ) { padding ->
         ParticipantsList(
@@ -181,7 +182,7 @@ fun ParticipantItemInput(
             verticalAlignment = CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-            //.background(color = MaterialTheme.colors.onSurface.copy(alpha = 0.5f))
+            // .background(color = MaterialTheme.colors.onSurface.copy(alpha = 0.5f))
         ) {
             ParticipantInputText(
                 text = text,
@@ -222,10 +223,12 @@ private fun ParticipantInputText(
         placeholder = { Text(text = "Type participant's name") },
         maxLines = 1,
         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-        keyboardActions = KeyboardActions(onDone = {
-            submit()
-            keyboardController?.hide()
-        }),
+        keyboardActions = KeyboardActions(
+            onDone = {
+                submit()
+                keyboardController?.hide()
+            }
+        ),
         modifier = modifier
     )
 }

@@ -12,10 +12,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -32,7 +30,6 @@ import com.handysparksoft.groupsgenerator.ui.theme.C02Orange
 import com.handysparksoft.groupsgenerator.ui.theme.C03Red
 import com.handysparksoft.groupsgenerator.ui.theme.C04Blue
 import com.handysparksoft.groupsgenerator.ui.theme.C05Purple
-import com.handysparksoft.groupsgenerator.ui.theme.C06Pink
 
 @Composable
 fun AListItem(aList: AList, onClick: () -> Unit) {
@@ -47,7 +44,11 @@ fun AListItem(aList: AList, onClick: () -> Unit) {
             .fillMaxWidth()
     ) {
         Row {
-            Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 32.dp).weight(1f)) {
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 32.dp)
+                    .weight(1f)
+            ) {
 //                Thumb(aList)
                 ListTitle(aList = aList)
                 ListInfo(aList = aList)
@@ -61,7 +62,9 @@ fun AListItem(aList: AList, onClick: () -> Unit) {
             Image(
                 painter = painterResource(id = R.drawable.il_team_work),
                 contentDescription = null,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 32.dp).width(60.dp)
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 32.dp)
+                    .width(60.dp)
             )
         }
     }
@@ -101,4 +104,4 @@ fun GroupItemPreview() {
 }
 
 private val CardCornerShape = CutCornerShape(16.dp, 0.dp, 16.dp, 0.dp)
-private val CardColors = listOf(C01Green, C02Orange, C03Red, C04Blue, C05Purple/*, C06Pink*/)
+private val CardColors = listOf(C01Green, C02Orange, C03Red, C04Blue, C05Purple)
