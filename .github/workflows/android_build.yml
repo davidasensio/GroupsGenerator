@@ -2,9 +2,9 @@ name: Android Build
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   build:
@@ -12,11 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run Lint
-        run: ./gradlew lint
+
+      - name: Run ktlint
+        run: ./gradlew spotlessCheck
+
+      - name: Run compileDebugKotlin
+        run: ./gradlew compileDebugKotlin
 
       - name: Run Tests
         run: ./gradlew test
 
-      - name: Build Project (Debug)
-        run: ./gradlew assembleDebug
+#      - name: Run Lint
+#        run: ./gradlew lint
+
+#      - name: Build Project (Debug)
+#        run: ./gradlew assembleDebug
