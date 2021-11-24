@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">GroupsGenerator</string>
     <string name="up_action_top_bar">Up to previous screen</string>
+
+    <string name="type_participant">Participant</string>
+    <string name="type_couple">Couple</string>
+    <string name="type_head">Head</string>
+    <string name="type_deactivated">Couple</string>
 </resources>

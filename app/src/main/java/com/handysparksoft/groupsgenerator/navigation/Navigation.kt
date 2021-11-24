@@ -7,10 +7,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.handysparksoft.groupsgenerator.ui.screens.detail.DetailScreen
+import com.handysparksoft.groupsgenerator.ui.screens.detail.DetailViewModel
 import com.handysparksoft.groupsgenerator.ui.screens.main.MainScreen
 
 @Composable
-fun Navigation() {
+fun Navigation(detailViewModel: DetailViewModel) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = NavItem.Main.route) {
@@ -20,8 +21,9 @@ fun Navigation() {
             })
         }
         composable(NavItem.Detail) { backStackEntry ->
+            detailViewModel.aListId = backStackEntry.findArg(NavArg.GroupId.key)
             DetailScreen(
-                aListId = backStackEntry.findArg(NavArg.GroupId.key),
+                viewModel = detailViewModel,
                 onUpClick = { navController.popBackStack() }
             )
         }

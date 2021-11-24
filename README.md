@@ -17,3 +17,10 @@ Main features are:
 
 ## Author 
 David Asensio - 2021
+
+
+
+## TODOs:
+- Complete navigation with Create AList
+- Add FAB in the main screen for creating a new List
+- Main Menu: order by | share app, rate app, contact 
