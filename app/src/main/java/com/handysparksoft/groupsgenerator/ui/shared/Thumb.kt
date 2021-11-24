@@ -9,10 +9,7 @@ import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.model.AList.Type.Special
 
