@@ -9,14 +9,16 @@ import androidx.navigation.compose.rememberNavController
 import com.handysparksoft.groupsgenerator.ui.screens.detail.DetailScreen
 import com.handysparksoft.groupsgenerator.ui.screens.detail.DetailViewModel
 import com.handysparksoft.groupsgenerator.ui.screens.main.MainScreen
+import com.handysparksoft.groupsgenerator.ui.screens.main.MainViewModel
 
 @Composable
-fun Navigation(detailViewModel: DetailViewModel) {
+fun Navigation(mainViewModel: MainViewModel, detailViewModel: DetailViewModel) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = NavItem.Main.route) {
         composable(NavItem.Main) {
             MainScreen(
+                viewModel = mainViewModel,
                 onAListClick = { aList ->
                     navController.navigate(NavItem.Detail.createNavRoute(aList.id))
                 }

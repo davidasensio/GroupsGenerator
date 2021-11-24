@@ -5,40 +5,46 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.handysparksoft.groupsgenerator.App
 import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.model.Participant
-import com.handysparksoft.groupsgenerator.model.getList
 
 class DetailViewModel : ViewModel() {
-    lateinit var aList: AList
+
+    private lateinit var aList: AList
     var aListId: Int? = null
         set(value) {
             field = value
-            aList = getList().first() { it.id == aListId }
+            selectAList()
         }
+
+    private fun selectAList() {
+        App.prefs?.aLists?.firstOrNull { it.id == aListId }?.let {
+            aList = it
+            participants.clear()
+            participants.addAll(aList.participants)
+        }
+    }
+
     val listName: String
         get() = aList.name
 
-    //    private val _participants = MutableLiveData(mutableListOf<Participant>())
-//    val participants: LiveData<MutableList<Participant>> = _participants
     private var currentEditPosition by mutableStateOf(-1)
     var participants = mutableStateListOf<Participant>()
         private set
+
     val currentEditParticipant: Participant?
         get() = participants.getOrNull(currentEditPosition)
 
-    init {
-        aList = getList()[0]
-//        participants.addAll(aList.participants) //.toMutableList()
-    }
-
     fun addParticipant(participant: Participant) {
         participants.add(participant)
+        saveToPrefs()
     }
 
     fun removeParticipant(participant: Participant) {
         participants.remove(participant)
         onEditDone()
+        saveToPrefs()
     }
 
     fun onEditParticipantSelected(participant: Participant) {
@@ -55,5 +61,16 @@ class DetailViewModel : ViewModel() {
             "Edited participant id should be the same as the current one"
         }
         participants[currentEditPosition] = participant
+        saveToPrefs()
+    }
+
+    private fun saveToPrefs() {
+        App.prefs?.aLists?.let {
+            val newList = aList.copy(participants = participants)
+            val newLists = it.toMutableList()
+            newLists[it.indexOf(aList)] = newList
+            App.prefs?.aLists = newLists
+            selectAList()
+        }
     }
 }
