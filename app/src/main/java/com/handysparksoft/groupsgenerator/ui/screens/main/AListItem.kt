@@ -24,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.model.AList
-import com.handysparksoft.groupsgenerator.model.getList
 import com.handysparksoft.groupsgenerator.ui.theme.C01Green
 import com.handysparksoft.groupsgenerator.ui.theme.C02Orange
 import com.handysparksoft.groupsgenerator.ui.theme.C03Red
@@ -53,12 +52,6 @@ fun AListItem(aList: AList, onClick: () -> Unit) {
                 ListTitle(aList = aList)
                 ListInfo(aList = aList)
             }
-            /*Text(
-                text = "${aList.participants.size} Participants",
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(bottom = 16.dp)
-            )*/
             Image(
                 painter = painterResource(id = R.drawable.il_team_work),
                 contentDescription = null,
@@ -100,7 +93,14 @@ private fun ListInfo(aList: AList) {
 @Preview
 @Composable
 fun GroupItemPreview() {
-    AListItem(aList = getList().first(), onClick = { })
+    AListItem(
+        aList = AList(
+            id = 1,
+            name = "List 1",
+            description = "The first list"
+        ),
+        onClick = { }
+    )
 }
 
 private val CardCornerShape = CutCornerShape(16.dp, 0.dp, 16.dp, 0.dp)
