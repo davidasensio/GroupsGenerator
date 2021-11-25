@@ -17,11 +17,15 @@ import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 
 @Composable
-fun MainScreen(viewModel: MainViewModel, onAListClick: (AList) -> Unit) {
+fun MainScreen(
+    viewModel: MainViewModel,
+    onAListClick: (AList) -> Unit,
+    onCreateClick: () -> Unit,
+) {
     val listState = rememberLazyListState()
     viewModel.currentListPosition = listState.firstVisibleItemIndex
 
-    MainScreenScaffold(viewModel = viewModel) { padding ->
+    MainScreenScaffold(viewModel = viewModel, onCreateClick = onCreateClick) { padding ->
         LazyColumn(
             state = listState,
             modifier = Modifier
@@ -60,7 +64,8 @@ fun MainScreenPreview() {
     GroupsGeneratorApp {
         MainScreen(
             viewModel = MainViewModel(),
-            onAListClick = {}
+            onAListClick = {},
+            onCreateClick = {}
         )
     }
 }

@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.handysparksoft.groupsgenerator.App
 import com.handysparksoft.groupsgenerator.model.AList
-import java.util.UUID
 
 class MainViewModel : ViewModel() {
     var aLists = mutableStateListOf<AList>()
@@ -33,13 +32,8 @@ class MainViewModel : ViewModel() {
         aLists.addAll(savedLists)
     }
 
-    fun addAList() {
+    fun addAList(aList: AList) {
         clearSelection()
-        val aList = AList(
-            id = UUID.randomUUID().toString(),
-            name = "Random${aLists.size + 10}",
-            description = "A fake description for this groupd...."
-        )
         aLists.add(aList)
         saveToPrefs()
     }

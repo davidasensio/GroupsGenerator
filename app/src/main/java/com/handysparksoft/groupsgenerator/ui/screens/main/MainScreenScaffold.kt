@@ -22,6 +22,7 @@ import com.handysparksoft.groupsgenerator.platform.ShareIntentHandler
 @Composable
 fun MainScreenScaffold(
     viewModel: MainViewModel,
+    onCreateClick: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ) {
     val context = LocalContext.current
@@ -49,7 +50,7 @@ fun MainScreenScaffold(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { viewModel.addAList() }) {
+            FloatingActionButton(onClick = onCreateClick) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(horizontal = 16.dp)

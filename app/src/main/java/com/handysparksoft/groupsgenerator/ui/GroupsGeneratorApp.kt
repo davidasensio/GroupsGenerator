@@ -30,7 +30,7 @@ fun GroupsGeneratorPreview() {
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            MainScreen(MainViewModel(), onAListClick = { })
+            MainScreen(MainViewModel(), onAListClick = {}, onCreateClick = {})
         }
     }
 }

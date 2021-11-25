@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.handysparksoft.groupsgenerator.ui.screens.create.CreateScreen
 import com.handysparksoft.groupsgenerator.ui.screens.detail.DetailScreen
 import com.handysparksoft.groupsgenerator.ui.screens.detail.DetailViewModel
 import com.handysparksoft.groupsgenerator.ui.screens.main.MainScreen
@@ -21,6 +22,9 @@ fun Navigation(mainViewModel: MainViewModel, detailViewModel: DetailViewModel) {
                 viewModel = mainViewModel,
                 onAListClick = { aList ->
                     navController.navigate(NavItem.Detail.createNavRoute(aList.id))
+                },
+                onCreateClick = {
+                    navController.navigate(NavItem.Create.baseRoute)
                 }
             )
         }
@@ -29,6 +33,15 @@ fun Navigation(mainViewModel: MainViewModel, detailViewModel: DetailViewModel) {
             DetailScreen(
                 viewModel = detailViewModel,
                 onUpClick = { navController.popBackStack() }
+            )
+        }
+        composable(NavItem.Create) {
+            CreateScreen(
+                onUpClick = { navController.popBackStack() },
+                onCreateClick = {
+                    mainViewModel.addAList(it)
+                    navController.navigate(NavItem.Main.baseRoute)
+                }
             )
         }
     }
