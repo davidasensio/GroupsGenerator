@@ -1,8 +1,9 @@
 package com.handysparksoft.groupsgenerator.ui.screens.main
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -29,51 +31,80 @@ import com.handysparksoft.groupsgenerator.ui.theme.C02Orange
 import com.handysparksoft.groupsgenerator.ui.theme.C03Red
 import com.handysparksoft.groupsgenerator.ui.theme.C04Blue
 import com.handysparksoft.groupsgenerator.ui.theme.C05Purple
+import com.handysparksoft.groupsgenerator.ui.theme.C06Pink
+import kotlin.math.abs
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun AListItem(aList: AList, onClick: () -> Unit) {
+fun AListItem(
+    aList: AList,
+    selected: Boolean,
+    onSelectedChange: (Boolean) -> Unit,
+    onClick: () -> Unit
+) {
     Card(
         shape = CardCornerShape,
         elevation = 0.dp,
         backgroundColor = getListColor(aList.id),
-        border = BorderStroke(1.dp, color = MaterialTheme.colors.secondary),
+        border = getBorder(selected),
         modifier = Modifier
             .shadow(shape = CardCornerShape, elevation = 2.dp)
-            .clickable(onClick = onClick)
+            .combinedClickable(
+                onClick = onClick,
+                onLongClick = { onSelectedChange(!selected) }
+            )
             .fillMaxWidth()
     ) {
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Column(
                 modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 32.dp)
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
                     .weight(1f)
             ) {
 //                Thumb(aList)
-                ListTitle(aList = aList)
+                ListTitle(title = aList.name)
+                ListDescription(description = aList.description)
                 ListInfo(aList = aList)
             }
             Image(
                 painter = painterResource(id = R.drawable.il_team_work),
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 32.dp)
+                    .padding(vertical = 32.dp)
                     .width(60.dp)
             )
         }
     }
 }
 
-fun getListColor(listId: Int): Color =
-    CardColors[listId % CardColors.size]
+@Composable
+private fun getBorder(selected: Boolean) = when (selected) {
+    true -> BorderStroke(3.dp, color = MaterialTheme.colors.primaryVariant)
+    false -> BorderStroke(1.dp, color = MaterialTheme.colors.primary)
+}
+
+fun getListColor(listId: String): Color = CardColors[abs(listId.hashCode()) % CardColors.size]
 
 @Composable
-private fun ListTitle(aList: AList) {
+private fun ListTitle(title: String) {
     Box() {
         Text(
-            text = aList.name,
+            text = title,
             style = MaterialTheme.typography.h6,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
+        )
+    }
+}
+
+@Composable
+private fun ListDescription(description: String) {
+    Box() {
+        Text(
+            text = description,
+            style = MaterialTheme.typography.body1,
+            maxLines = 3,
+            modifier = Modifier.padding(top = 8.dp)
         )
     }
 }
@@ -95,13 +126,15 @@ private fun ListInfo(aList: AList) {
 fun GroupItemPreview() {
     AListItem(
         aList = AList(
-            id = 1,
+            id = "1",
             name = "List 1",
             description = "The first list"
         ),
+        selected = false,
+        onSelectedChange = { },
         onClick = { }
     )
 }
 
-private val CardCornerShape = CutCornerShape(16.dp, 0.dp, 16.dp, 0.dp)
-private val CardColors = listOf(C01Green, C02Orange, C03Red, C04Blue, C05Purple)
+private val CardCornerShape = CutCornerShape(24.dp, 0.dp, 24.dp, 0.dp)
+private val CardColors = listOf(C01Green, C02Orange, C03Red, C04Blue, C05Purple, C06Pink)

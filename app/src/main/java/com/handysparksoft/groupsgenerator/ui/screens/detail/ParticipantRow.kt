@@ -46,7 +46,7 @@ private fun randomTint(): Float = Random.nextFloat().coerceIn(0.3f, 0.9f)
 @Composable
 fun ParticipantRowPreview() {
     ParticipantRow(
-        participant = Participant(1, "David Bowie"),
+        participant = Participant("1", "David Bowie"),
         onParticipantClicked = {},
         modifier = Modifier
     )

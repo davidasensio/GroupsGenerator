@@ -5,6 +5,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
@@ -13,12 +14,16 @@ import androidx.compose.ui.res.stringResource
 import com.handysparksoft.groupsgenerator.R
 
 @Composable
-fun MainAppBar() {
+fun MainAppBar(anySelected: Boolean, onDeleteClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = stringResource(id = R.string.app_name)) },
         actions = {
-            AppBarAction(imageVector = Icons.Default.Search, onClick = { /*TODO*/ })
-            AppBarAction(imageVector = Icons.Default.Share, onClick = { /*TODO*/ })
+            if (anySelected) {
+                AppBarAction(imageVector = Icons.Default.Delete, onClick = onDeleteClick)
+            } else {
+                AppBarAction(imageVector = Icons.Default.Search, onClick = { /*TODO*/ })
+                AppBarAction(imageVector = Icons.Default.Share, onClick = { /*TODO*/ })
+            }
         }
     )
 }
