@@ -26,13 +26,11 @@ import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
@@ -55,7 +53,6 @@ import androidx.compose.ui.unit.dp
 import com.handysparksoft.groupsgenerator.model.Participant
 import com.handysparksoft.groupsgenerator.model.ParticipantTypeIcon
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
-import com.handysparksoft.groupsgenerator.ui.shared.ArrowBackIcon
 import com.handysparksoft.groupsgenerator.ui.shared.BackToTopButton
 import kotlinx.coroutines.launch
 
@@ -63,14 +60,7 @@ import kotlinx.coroutines.launch
 fun DetailScreen(viewModel: DetailViewModel, onUpClick: () -> Unit) {
     val participants: List<Participant> = viewModel.participants
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(viewModel.listName) },
-                navigationIcon = { ArrowBackIcon(onUpClick) }
-            )
-        },
-    ) { padding ->
+    DetailScreenScaffold(viewModel = viewModel, onUpClick = onUpClick) { padding ->
         ParticipantsList(
             participants = participants,
             onAddParticipant = { viewModel.addParticipant(it) },
