@@ -21,6 +21,7 @@ class MainViewModel : ViewModel() {
             field = value
         }
     var toolbarEditOptionsShown = mutableStateOf(false)
+    var orderAsc = true
 
     init {
         loadSavedLists()
@@ -68,6 +69,15 @@ class MainViewModel : ViewModel() {
 
     private fun updateToolbarEditOptionsVisibility() {
         toolbarEditOptionsShown.value = selectedALists.size > 0
+    }
+
+    fun sortAlphabetically() {
+        if (orderAsc) {
+            aLists.sortBy { it.name }
+        } else {
+            aLists.sortByDescending { it.name }
+        }
+        orderAsc = !orderAsc
     }
 
     private fun saveToPrefs() {

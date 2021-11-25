@@ -6,4 +6,17 @@
     <string name="type_couple">Couple</string>
     <string name="type_deactivated">Deactivated</string>
     <string name="type_head">Head</string>
+
+    <string name="menu_main_order">Order</string>
+    <string name="menu_main_share_app">Share app</string>
+    <string name="menu_main_rate_this_app">Rate this app</string>
+    <string name="menu_main_contact">Contact</string>
+
+    <string name="share_app_title">Try this App!</string>
+    <string name="share_app_content">Download Grouped and generate random groups easily</string>
+    <string name="share_app_google_play_url" translatable="false">https://play.google.com/store/apps/details?id=com.handysparksoft.groupsgenerator</string>
+
+    <string name="intent_contact_email" translatable="false">handysparksoft@gmail.com</string>
+    <string name="intent_contact_subject">[Grouped] Contact info</string>
+    <string name="intent_contact_text">Hi Grouped team,\n\n -> Your info here…\n\n Cheers.</string>
 </resources>
