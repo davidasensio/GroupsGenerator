@@ -17,10 +17,11 @@ sealed class NavItem(
         navArgument(it.key) { type = it.navType }
     }
 
-    object Main : NavItem("main")
-    object Detail : NavItem("detail", navArgs = listOf(NavArg.GroupId)) {
+    object Main : NavItem(baseRoute = "main")
+    object Detail : NavItem(baseRoute = "detail", navArgs = listOf(NavArg.GroupId)) {
         fun createNavRoute(aListId: String) = "$baseRoute/$aListId"
     }
+    object Create : NavItem(baseRoute = "create")
 }
 
 enum class NavArg(val key: String, val navType: NavType<*>) {
