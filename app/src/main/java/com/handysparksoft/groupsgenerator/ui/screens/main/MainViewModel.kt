@@ -9,6 +9,13 @@ class MainViewModel : ViewModel() {
     var aLists = mutableStateListOf<AList>()
         private set
 
+    var fabTextShown = true
+    var currentListPosition = 0
+        set(value) {
+            fabTextShown = value == 0 || value < currentListPosition
+            field = value
+        }
+
     init {
         val savedLists = App.prefs?.aLists ?: emptyList()
         aLists.addAll(savedLists)
