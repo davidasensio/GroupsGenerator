@@ -17,9 +17,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MainScreenScaffold(viewModel: MainViewModel, content: @Composable (PaddingValues) -> Unit) {
+fun MainScreenScaffold(
+    viewModel: MainViewModel,
+    content: @Composable (PaddingValues) -> Unit
+) {
     Scaffold(
-        topBar = { MainAppBar() },
+        topBar = {
+            MainAppBar(
+                anySelected = viewModel.toolbarEditOptionsShown.value,
+                onDeleteClick = {
+                    viewModel.deleteSelected()
+                }
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(onClick = { viewModel.addAList() }) {
                 Row(

@@ -39,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -54,6 +55,7 @@ import com.handysparksoft.groupsgenerator.model.Participant
 import com.handysparksoft.groupsgenerator.model.ParticipantTypeIcon
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 import com.handysparksoft.groupsgenerator.ui.shared.BackToTopButton
+import java.util.UUID
 import kotlinx.coroutines.launch
 
 @Composable
@@ -89,10 +91,7 @@ private fun ParticipantsList(
         val enableHeader = currentEditingParticipant == null
 
         if (enableHeader) {
-            ParticipantInputHeader(
-                participantsNumber = participants.size,
-                onAddParticipant = onAddParticipant,
-            )
+            ParticipantInputHeader(onAddParticipant = onAddParticipant)
         } else {
             Surface(color = MaterialTheme.colors.onSurface.copy(alpha = 0.05f)) {
                 Text(
@@ -122,25 +121,27 @@ private fun ParticipantsList(
 }
 
 @Composable
-private fun ParticipantInputHeader(
-    participantsNumber: Int,
-    onAddParticipant: (Participant) -> Unit,
-) {
+private fun ParticipantInputHeader(onAddParticipant: (Participant) -> Unit) {
     Column {
-        ParticipantEntryItemInput(participantsNumber, onAddParticipant)
+        ParticipantEntryItemInput(onAddParticipant)
     }
 }
 
 @Composable
-private fun ParticipantEntryItemInput(
-    participantsNumber: Int,
-    onAddParticipant: (Participant) -> Unit
-) {
+private fun ParticipantEntryItemInput(onAddParticipant: (Participant) -> Unit) {
     val (text, setText) = rememberSaveable { mutableStateOf("") }
     val (icon, setIcon) = remember { mutableStateOf(ParticipantTypeIcon.Default) }
     val iconsVisible = text.isNotBlank()
     val submit = {
-        onAddParticipant(Participant(id = participantsNumber + 1, name = text, icon = icon))
+        onAddParticipant(
+            Participant(
+                id = UUID.randomUUID().toString(),
+                name = text,
+                icon = icon,
+                isCouple = icon == ParticipantTypeIcon.Couple,
+                isDeactivated = icon == ParticipantTypeIcon.Deactivated
+            )
+        )
         setIcon(ParticipantTypeIcon.Default)
         setText("")
     }
@@ -215,8 +216,10 @@ private fun ParticipantInputText(
         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
         keyboardActions = KeyboardActions(
             onDone = {
-                submit()
-                keyboardController?.hide()
+                if (text.isNotBlank()) {
+                    submit()
+                    keyboardController?.hide()
+                }
             }
         ),
         modifier = modifier
@@ -324,7 +327,15 @@ fun ParticipantItemInlineEditor(
         text = participant.name,
         onTextChange = { onEditParticipantChange(participant.copy(name = it)) },
         icon = participant.icon,
-        onIconChange = { onEditParticipantChange(participant.copy(icon = it)) },
+        onIconChange = {
+            onEditParticipantChange(
+                participant.copy(
+                    icon = it,
+                    isCouple = it == ParticipantTypeIcon.Couple,
+                    isDeactivated = it == ParticipantTypeIcon.Deactivated
+                )
+            )
+        },
         iconsVisible = participant.name.isNotBlank(),
         submit = onEditDone
     ) {
@@ -390,14 +401,19 @@ private fun ListParticipants(
 
 @Composable
 private fun ListInfo(participants: List<Participant>) {
-    Box(Modifier.fillMaxWidth()) {
+    val countValue = participants.sumOf { it.countValue }
+
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .height(48.dp),
+        contentAlignment = Center
+    ) {
 //        Thumb(aList = aList)
         Text(
-            text = "${participants.size} Participants",
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.Center)
-                .padding(bottom = 16.dp)
+            text = "$countValue Participants",
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.h6,
         )
     }
 }

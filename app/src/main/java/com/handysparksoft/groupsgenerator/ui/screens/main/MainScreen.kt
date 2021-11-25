@@ -8,6 +8,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,8 +30,25 @@ fun MainScreen(viewModel: MainViewModel, onAListClick: (AList) -> Unit) {
             contentPadding = PaddingValues(24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            items(viewModel.aLists) { group ->
-                AListItem(group, onClick = { onAListClick(group) })
+            items(viewModel.aLists /*key = { it.id }*/) { aList ->
+                val (selected, setSelected) = rememberSaveable(aList.id) { mutableStateOf(false) }
+                AListItem(
+                    aList = aList,
+                    selected = selected,
+                    onSelectedChange = { isSelected ->
+                        setSelected(isSelected)
+                        viewModel.addListToSelection(aList.id)
+                    },
+                    onClick = {
+                        if (selected) {
+                            setSelected(false)
+                            viewModel.removeListFromSelection(aList.id)
+                        } else {
+                            viewModel.clearSelection()
+                            onAListClick(aList)
+                        }
+                    }
+                )
             }
         }
     }

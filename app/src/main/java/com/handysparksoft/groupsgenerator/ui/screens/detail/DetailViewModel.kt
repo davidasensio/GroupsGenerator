@@ -11,8 +11,9 @@ import com.handysparksoft.groupsgenerator.model.Participant
 
 class DetailViewModel : ViewModel() {
 
-    private lateinit var aList: AList
-    var aListId: Int? = null
+    lateinit var aList: AList
+
+    var aListId: String? = null
         set(value) {
             field = value
             selectAList()
@@ -27,7 +28,9 @@ class DetailViewModel : ViewModel() {
     }
 
     val listName: String
-        get() = aList.name
+        get() = if (::aList.isInitialized) {
+            aList.name
+        } else ""
 
     private var currentEditPosition by mutableStateOf(-1)
     var participants = mutableStateListOf<Participant>()

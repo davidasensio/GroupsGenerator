@@ -8,7 +8,7 @@ class DetailViewModelTest {
     @Test
     fun whenAddParticipant_updateList() {
         val subject = DetailViewModel()
-        val expected = Participant(1, "Participant 1")
+        val expected = Participant("1", "Participant 1")
         subject.addParticipant(expected)
         Truth.assertThat(subject.participants).isEqualTo(listOf(expected))
     }
@@ -16,8 +16,8 @@ class DetailViewModelTest {
     @Test
     fun whenRemovingParticipant_updateList() {
         val viewModel = DetailViewModel()
-        val participant1 = Participant(1, "Participant 1")
-        val participant2 = Participant(2, "Participant 2")
+        val participant1 = Participant("1", "Participant 1")
+        val participant2 = Participant("2", "Participant 2")
         viewModel.addParticipant(participant1)
         viewModel.addParticipant(participant2)
 
@@ -29,7 +29,7 @@ class DetailViewModelTest {
     @Test
     fun whenNotEditing_currentEditParticipantIsNull() {
         val subject = DetailViewModel()
-        val participant1 = Participant(1, "Participant 1")
+        val participant1 = Participant("1", "Participant 1")
         subject.addParticipant(participant1)
         Truth.assertThat(subject.currentEditParticipant).isNull()
     }
@@ -37,8 +37,8 @@ class DetailViewModelTest {
     @Test
     fun whenEditing_currentEditParticipantIsCorrect() {
         val subject = DetailViewModel()
-        val participant1 = Participant(1, "Participant 1")
-        val participant2 = Participant(2, "Participant 2")
+        val participant1 = Participant("1", "Participant 1")
+        val participant2 = Participant("2", "Participant 2")
         subject.addParticipant(participant1)
         subject.addParticipant(participant2)
         subject.onEditParticipantSelected(participant1)
@@ -48,8 +48,8 @@ class DetailViewModelTest {
     @Test
     fun whenEditDone_currentEditParticipantIsCorrect() {
         val subject = DetailViewModel()
-        val participant1 = Participant(1, "Participant 1")
-        val participant2 = Participant(2, "Participant 2")
+        val participant1 = Participant("1", "Participant 1")
+        val participant2 = Participant("2", "Participant 2")
         subject.addParticipant(participant1)
         subject.addParticipant(participant2)
         subject.onEditParticipantSelected(participant1)
@@ -60,8 +60,8 @@ class DetailViewModelTest {
     @Test
     fun whenEditing_updatesAreShownInParticipantAndList() {
         val subject = DetailViewModel()
-        val participant1 = Participant(1, "Participant 1")
-        val participant2 = Participant(2, "Participant 2")
+        val participant1 = Participant("1", "Participant 1")
+        val participant2 = Participant("2", "Participant 2")
         subject.addParticipant(participant1)
         subject.addParticipant(participant2)
         subject.onEditParticipantSelected(participant1)
@@ -74,8 +74,8 @@ class DetailViewModelTest {
     @Test(expected = IllegalArgumentException::class)
     fun whenEditing_wrongParticipantThrows() {
         val subject = DetailViewModel()
-        val participant1 = Participant(1, "Participant 1")
-        val participant2 = Participant(2, "Participant 2")
+        val participant1 = Participant("1", "Participant 1")
+        val participant2 = Participant("2", "Participant 2")
         subject.addParticipant(participant1)
         subject.addParticipant(participant2)
         subject.onEditParticipantSelected(participant1)
@@ -86,7 +86,7 @@ class DetailViewModelTest {
     @Test(expected = IllegalArgumentException::class)
     fun whenNotEditing_onParticipantEditChangeThrows() {
         val subject = DetailViewModel()
-        val participant1 = Participant(1, "Participant 1")
+        val participant1 = Participant("1", "Participant 1")
         subject.onEditParticipantChange(participant1)
     }
 }

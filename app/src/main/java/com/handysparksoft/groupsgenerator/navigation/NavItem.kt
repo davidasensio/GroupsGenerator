@@ -19,10 +19,10 @@ sealed class NavItem(
 
     object Main : NavItem("main")
     object Detail : NavItem("detail", navArgs = listOf(NavArg.GroupId)) {
-        fun createNavRoute(aListId: Int) = "$baseRoute/$aListId"
+        fun createNavRoute(aListId: String) = "$baseRoute/$aListId"
     }
 }
 
 enum class NavArg(val key: String, val navType: NavType<*>) {
-    GroupId(key = "groupId", navType = NavType.IntType)
+    GroupId(key = "aListId", navType = NavType.StringType)
 }
