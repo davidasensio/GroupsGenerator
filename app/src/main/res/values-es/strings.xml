@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Agrupados App</string>
+    <string name="up_action_top_bar">Volver a la pantalla anterior</string>
+
+    <string name="type_participant">Participante</string>
+    <string name="type_couple">Pareja</string>
+    <string name="type_deactivated">Desactivado</string>
+    <string name="type_head">Cabeza</string>
+</resources>

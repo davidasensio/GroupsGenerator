@@ -4,4 +4,8 @@
     <style name="Theme.GroupsGenerator" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/green_700</item>
     </style>
+
+    <style name="Theme.Splash" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_splash_background</item>
+    </style>
 </resources>
