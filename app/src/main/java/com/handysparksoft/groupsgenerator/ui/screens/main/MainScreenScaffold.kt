@@ -25,6 +25,9 @@ fun MainScreenScaffold(
         topBar = {
             MainAppBar(
                 anySelected = viewModel.toolbarEditOptionsShown.value,
+                onSortClick = {
+                    viewModel.sortAlphabetically()
+                },
                 onDeleteClick = {
                     viewModel.deleteSelected()
                 }
