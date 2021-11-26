@@ -55,8 +55,8 @@ import com.handysparksoft.groupsgenerator.model.Participant
 import com.handysparksoft.groupsgenerator.model.ParticipantTypeIcon
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 import com.handysparksoft.groupsgenerator.ui.shared.BackToTopButton
-import java.util.UUID
 import kotlinx.coroutines.launch
+import java.util.*
 
 @Composable
 fun DetailScreen(viewModel: DetailViewModel, onUpClick: () -> Unit) {
@@ -373,20 +373,29 @@ private fun ListParticipants(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(bottom = 60.dp)
         ) {
-            items(participants) { participant ->
-                if (participant.id == currentEditingParticipant?.id) {
-                    ParticipantItemInlineEditor(
-                        participant = participant,
-                        onEditParticipantChange = onEditParticipantChange,
-                        onEditDone = onEditDone,
-                        onRemoveParticipant = { onRemoveParticipant(participant) }
-                    )
-                } else {
-                    ParticipantRow(
-                        participant = participant,
-                        onParticipantClicked = onStartEdit,
-                        modifier = Modifier.fillParentMaxWidth()
-                    )
+            val grouped = participants.groupBy { it.isDeactivated }
+            grouped.forEach { isDeactivated, participantsGrouped ->
+                item {
+                    if (isDeactivated) {
+                        DeactivatedHeader()
+                    }
+                }
+
+                items(participantsGrouped) { participant ->
+                    if (participant.id == currentEditingParticipant?.id) {
+                        ParticipantItemInlineEditor(
+                            participant = participant,
+                            onEditParticipantChange = onEditParticipantChange,
+                            onEditDone = onEditDone,
+                            onRemoveParticipant = { onRemoveParticipant(participant) }
+                        )
+                    } else {
+                        ParticipantRow(
+                            participant = participant,
+                            onParticipantClicked = onStartEdit,
+                            modifier = Modifier.fillParentMaxWidth()
+                        )
+                    }
                 }
             }
         }
@@ -397,6 +406,23 @@ private fun ListParticipants(
             scope.launch { listState.scrollToItem(0) }
         }
     }
+}
+
+@Composable
+private fun DeactivatedHeader() {
+    Text(
+        text = "Deactivated",
+        color = MaterialTheme.colors.onSurface.copy(alpha = 0.5f),
+        textAlign = TextAlign.Center,
+        style = MaterialTheme.typography.button,
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                color = MaterialTheme.colors.error.copy(
+                    alpha = 0.1f
+                )
+            )
+    )
 }
 
 @Composable
@@ -424,7 +450,6 @@ private fun GenerateGroupsButton() {
         onClick = { /*TODO*/ },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
     ) {
         Text(text = "Generate groups")
     }

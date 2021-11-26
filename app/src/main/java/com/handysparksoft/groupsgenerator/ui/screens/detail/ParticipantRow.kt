@@ -35,7 +35,7 @@ fun ParticipantRow(
         Icon(
             imageVector = participant.icon.imageVector,
             contentDescription = stringResource(id = participant.icon.contentDescription),
-            tint = LocalContentColor.current.copy(alpha = iconAlpha)
+            // tint = LocalContentColor.current.copy(alpha = iconAlpha)
         )
     }
 }
