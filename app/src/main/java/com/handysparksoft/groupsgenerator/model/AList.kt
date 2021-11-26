@@ -15,6 +15,7 @@ data class AList(
     enum class Type { Normal, Special }
 
     val itemCount = participants.size
+    val itemActiveCount = participants.filter { !it.isDeactivated }.size
     val itemRealCount = participants.sumOf { it.countValue }
 }
 

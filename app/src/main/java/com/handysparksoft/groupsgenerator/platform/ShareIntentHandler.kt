@@ -32,6 +32,18 @@ object ShareIntentHandler {
         startChooserIntent(viewIntent, activity)
     }
 
+    fun showShareGroupsIntentChooser(activity: Activity, content: String) {
+        val title = "Generated Groups"
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_SUBJECT, title)
+            putExtra(Intent.EXTRA_TEXT, content)
+            type = "text/plain"
+        }
+
+        startChooserIntent(sendIntent, activity)
+    }
+
     private fun startChooserIntent(sendIntent: Intent, activity: Activity) {
         val shareIntent = Intent.createChooser(sendIntent, null)
         if (shareIntent.resolveActivity(activity.packageManager) != null) {

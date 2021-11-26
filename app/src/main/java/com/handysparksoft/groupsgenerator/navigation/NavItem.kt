@@ -18,12 +18,15 @@ sealed class NavItem(
     }
 
     object Main : NavItem(baseRoute = "main")
-    object Detail : NavItem(baseRoute = "detail", navArgs = listOf(NavArg.GroupId)) {
+    object Detail : NavItem(baseRoute = "detail", navArgs = listOf(NavArg.ListId)) {
         fun createNavRoute(aListId: String) = "$baseRoute/$aListId"
     }
     object Create : NavItem(baseRoute = "create")
+    object Generate : NavItem(baseRoute = "generate", navArgs = listOf(NavArg.ListId)) {
+        fun createNavRoute(aListId: String) = "$baseRoute/$aListId"
+    }
 }
 
 enum class NavArg(val key: String, val navType: NavType<*>) {
-    GroupId(key = "aListId", navType = NavType.StringType)
+    ListId(key = "aListId", navType = NavType.StringType)
 }

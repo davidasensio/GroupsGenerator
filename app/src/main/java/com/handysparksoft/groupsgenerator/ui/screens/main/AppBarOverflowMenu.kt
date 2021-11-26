@@ -20,8 +20,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.handysparksoft.groupsgenerator.ui.shared.AppBarAction
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -74,19 +74,5 @@ fun AppBarOverflowMenu(
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun AppBarAction(
-    imageVector: ImageVector,
-    onClick: () -> Unit,
-    contentDescription: String? = null
-) {
-    IconButton(onClick = onClick) {
-        Icon(
-            imageVector = imageVector,
-            contentDescription = contentDescription
-        )
     }
 }
