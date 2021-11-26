@@ -55,8 +55,8 @@ import com.handysparksoft.groupsgenerator.model.Participant
 import com.handysparksoft.groupsgenerator.model.ParticipantTypeIcon
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 import com.handysparksoft.groupsgenerator.ui.shared.BackToTopButton
+import java.util.UUID
 import kotlinx.coroutines.launch
-import java.util.*
 
 @Composable
 fun DetailScreen(viewModel: DetailViewModel, onUpClick: () -> Unit) {
