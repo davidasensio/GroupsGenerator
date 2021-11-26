@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentColor
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -35,7 +34,7 @@ fun ParticipantRow(
         Icon(
             imageVector = participant.icon.imageVector,
             contentDescription = stringResource(id = participant.icon.contentDescription),
-            tint = LocalContentColor.current.copy(alpha = iconAlpha)
+            // tint = LocalContentColor.current.copy(alpha = iconAlpha)
         )
     }
 }
