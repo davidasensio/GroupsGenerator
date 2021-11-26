@@ -79,6 +79,7 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                         )
                     )
                 },
+                enabled = name.isNotBlank(),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Create")

@@ -59,7 +59,7 @@ import java.util.UUID
 import kotlinx.coroutines.launch
 
 @Composable
-fun DetailScreen(viewModel: DetailViewModel, onUpClick: () -> Unit) {
+fun DetailScreen(viewModel: DetailViewModel, onUpClick: () -> Unit, onGenerateClick: () -> Unit) {
     val participants: List<Participant> = viewModel.participants
 
     DetailScreenScaffold(viewModel = viewModel, onUpClick = onUpClick) { padding ->
@@ -71,6 +71,7 @@ fun DetailScreen(viewModel: DetailViewModel, onUpClick: () -> Unit) {
             onStartEdit = { viewModel.onEditParticipantSelected(it) },
             onEditDone = { viewModel.onEditDone() },
             onEditParticipantChange = { viewModel.onEditParticipantChange(it) },
+            onGenerateClick = onGenerateClick,
             modifier = Modifier.padding(padding)
         )
     }
@@ -85,6 +86,7 @@ private fun ParticipantsList(
     onStartEdit: (Participant) -> Unit,
     onEditParticipantChange: (Participant) -> Unit,
     onEditDone: () -> Unit,
+    onGenerateClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.padding(16.dp)) {
@@ -116,7 +118,7 @@ private fun ParticipantsList(
             modifier = Modifier.weight(1f)
         )
         ListInfo(participants)
-        GenerateGroupsButton()
+        GenerateGroupsButton(participants = participants, onGenerateClick = onGenerateClick)
     }
 }
 
@@ -373,7 +375,7 @@ private fun ListParticipants(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(bottom = 60.dp)
         ) {
-            val grouped = participants.groupBy { it.isDeactivated }
+            val grouped = participants.sortedBy { it.isDeactivated }.groupBy { it.isDeactivated }
             grouped.forEach { isDeactivated, participantsGrouped ->
                 item {
                     if (isDeactivated) {
@@ -445,11 +447,16 @@ private fun ListInfo(participants: List<Participant>) {
 }
 
 @Composable
-private fun GenerateGroupsButton() {
+private fun GenerateGroupsButton(
+    participants: List<Participant>,
+    onGenerateClick: () -> Unit
+) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onGenerateClick,
         modifier = Modifier
             .fillMaxWidth()
+            .defaultMinSize(minHeight = 48.dp),
+        enabled = participants.filter { !it.isDeactivated }.size > 1
     ) {
         Text(text = "Generate groups")
     }
@@ -462,7 +469,8 @@ fun DetailScreenPreview() {
     GroupsGeneratorApp {
         DetailScreen(
             viewModel = DetailViewModel(),
-            onUpClick = {}
+            onUpClick = {},
+            onGenerateClick = {}
         )
     }
 }

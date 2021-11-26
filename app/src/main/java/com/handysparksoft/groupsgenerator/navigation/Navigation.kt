@@ -1,6 +1,7 @@
 package com.handysparksoft.groupsgenerator.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
@@ -9,11 +10,17 @@ import androidx.navigation.compose.rememberNavController
 import com.handysparksoft.groupsgenerator.ui.screens.create.CreateScreen
 import com.handysparksoft.groupsgenerator.ui.screens.detail.DetailScreen
 import com.handysparksoft.groupsgenerator.ui.screens.detail.DetailViewModel
+import com.handysparksoft.groupsgenerator.ui.screens.generate.GenerateScreen
+import com.handysparksoft.groupsgenerator.ui.screens.generate.GenerateViewModel
 import com.handysparksoft.groupsgenerator.ui.screens.main.MainScreen
 import com.handysparksoft.groupsgenerator.ui.screens.main.MainViewModel
 
 @Composable
-fun Navigation(mainViewModel: MainViewModel, detailViewModel: DetailViewModel) {
+fun Navigation(
+    mainViewModel: MainViewModel,
+    detailViewModel: DetailViewModel,
+    generateViewModel: GenerateViewModel
+) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = NavItem.Main.route) {
@@ -29,10 +36,18 @@ fun Navigation(mainViewModel: MainViewModel, detailViewModel: DetailViewModel) {
             )
         }
         composable(NavItem.Detail) { backStackEntry ->
-            detailViewModel.aListId = backStackEntry.findArg(NavArg.GroupId.key)
+            val listIdSelected: String = backStackEntry.findArg(NavArg.ListId.key)
+            detailViewModel.aListId = listIdSelected
             DetailScreen(
                 viewModel = detailViewModel,
-                onUpClick = { navController.popBackStack() }
+                onUpClick = { navController.popBackStack() },
+                onGenerateClick = {
+                    navController.navigate(
+                        NavItem.Generate.createNavRoute(
+                            listIdSelected
+                        )
+                    )
+                }
             )
         }
         composable(NavItem.Create) {
@@ -40,8 +55,15 @@ fun Navigation(mainViewModel: MainViewModel, detailViewModel: DetailViewModel) {
                 onUpClick = { navController.popBackStack() },
                 onCreateClick = {
                     mainViewModel.addAList(it)
-                    navController.navigate(NavItem.Main.baseRoute)
+                    navController.popBackStack()
                 }
+            )
+        }
+        composable(NavItem.Generate) { backStackEntry ->
+            generateViewModel.aListId = backStackEntry.findArg(NavArg.ListId.key)
+            GenerateScreen(
+                viewModel = generateViewModel,
+                onUpClick = { navController.popBackStack() }
             )
         }
     }
