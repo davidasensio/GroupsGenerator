@@ -3,6 +3,7 @@ package com.handysparksoft.groupsgenerator.ui.screens.create
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
@@ -80,7 +81,7 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                     )
                 },
                 enabled = name.isNotBlank(),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().height(48.dp)
             ) {
                 Text("Create")
             }

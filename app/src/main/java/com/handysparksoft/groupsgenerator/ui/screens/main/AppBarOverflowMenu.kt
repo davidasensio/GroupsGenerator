@@ -57,7 +57,7 @@ fun AppBarOverflowMenu(
                                 contentDescription = "Share"
                             )
                         },
-                        modifier = Modifier.defaultMinSize(140.dp)
+                        // modifier = Modifier.defaultMinSize(140.dp)
                     )
                 }
                 DropdownMenuItem(onClick = onRateClick) {

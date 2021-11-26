@@ -15,7 +15,7 @@ fun CreateScreenScaffold(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Create new list") },
+                title = { Text("Create new List") },
                 navigationIcon = { ArrowBackIcon(onUpClick) }
             )
         },

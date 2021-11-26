@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
@@ -28,7 +29,8 @@ fun BackToTopButton(
     ) {
         OutlinedButton(
             border = BorderStroke(width = 1.dp, color = MaterialTheme.colors.primary),
-            onClick = onClick
+            onClick = onClick,
+            modifier = Modifier.height(48.dp)
         ) {
             Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
             Text(text = "Back to top")

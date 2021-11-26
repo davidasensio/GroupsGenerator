@@ -234,6 +234,7 @@ private fun ParticipantAddButton(onClick: () -> Unit, isEnabled: Boolean) {
         onClick = onClick,
         shape = CircleShape,
         enabled = isEnabled,
+        modifier = Modifier.height(48.dp)
     ) {
         Row(verticalAlignment = CenterVertically) {
             Icon(
@@ -364,7 +365,7 @@ private fun ListParticipants(
 ) {
     val scope = rememberCoroutineScope()
     val listState = rememberLazyListState()
-    val showBackToTopButton = listState.firstVisibleItemIndex > 0
+    val showBackToTopButton = listState.firstVisibleItemIndex > 1
 
     Box(
         contentAlignment = Alignment.TopStart,
@@ -455,7 +456,7 @@ private fun GenerateGroupsButton(
         onClick = onGenerateClick,
         modifier = Modifier
             .fillMaxWidth()
-            .defaultMinSize(minHeight = 48.dp),
+            .height(48.dp),
         enabled = participants.filter { !it.isDeactivated }.size > 1
     ) {
         Text(text = "Generate groups")

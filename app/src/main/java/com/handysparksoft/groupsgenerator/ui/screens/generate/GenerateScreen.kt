@@ -9,8 +9,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -134,8 +134,8 @@ fun GenerateScreen(
                 enabled = elementsNumber > 0,
                 modifier = Modifier
                     .align(CenterHorizontally)
-                    .defaultMinSize(minHeight = 48.dp)
                     .padding(vertical = 8.dp)
+                    .height(48.dp)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(imageVector = Icons.Default.Casino, contentDescription = null)

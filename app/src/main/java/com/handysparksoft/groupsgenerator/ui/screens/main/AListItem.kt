@@ -70,7 +70,7 @@ fun AListItem(
                 painter = painterResource(id = R.drawable.il_team_work),
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(vertical = 32.dp)
+                    .padding(vertical = 32.dp, horizontal = 16.dp)
                     .width(60.dp)
             )
         }
