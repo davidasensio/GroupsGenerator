@@ -21,6 +21,7 @@ class MainViewModel : ViewModel() {
         }
     var toolbarDeleteOptionShown = mutableStateOf(false)
     var orderAsc = true
+    var showDeleteConfirmDialog = mutableStateOf(false)
 
     init {
         loadSavedLists()

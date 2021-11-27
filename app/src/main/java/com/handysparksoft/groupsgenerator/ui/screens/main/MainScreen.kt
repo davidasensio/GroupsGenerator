@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
+import com.handysparksoft.groupsgenerator.ui.shared.ConfirmDialog
 
 @Composable
 fun MainScreen(
@@ -54,6 +55,17 @@ fun MainScreen(
                     }
                 )
             }
+        }
+
+        if (viewModel.showDeleteConfirmDialog.value) {
+            ConfirmDialog(
+                showDialog = viewModel.showDeleteConfirmDialog.value,
+                onShowDialogChange = { viewModel.showDeleteConfirmDialog.value = it },
+                title = "Confirm",
+                text = "Delete selected lists?",
+                onConfirmClick = { viewModel.deleteSelected() },
+                onDismissClick = { viewModel.showDeleteConfirmDialog.value = false }
+            )
         }
     }
 }

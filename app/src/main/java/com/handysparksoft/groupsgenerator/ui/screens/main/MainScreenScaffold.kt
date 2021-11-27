@@ -35,7 +35,7 @@ fun MainScreenScaffold(
                     viewModel.sortAlphabetically()
                 },
                 onDeleteClick = {
-                    viewModel.deleteSelected()
+                    viewModel.showDeleteConfirmDialog.value = true
                 },
                 onShareClick = {
                     (context as? Activity)?.let {
