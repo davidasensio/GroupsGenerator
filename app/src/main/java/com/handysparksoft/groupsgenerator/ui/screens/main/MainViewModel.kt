@@ -1,5 +1,6 @@
 package com.handysparksoft.groupsgenerator.ui.screens.main
 
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -22,6 +23,7 @@ class MainViewModel : ViewModel() {
     var toolbarDeleteOptionShown = mutableStateOf(false)
     var orderAsc = true
     var showDeleteConfirmDialog = mutableStateOf(false)
+    var showEmptyView = derivedStateOf { aLists.isEmpty() }
 
     init {
         loadSavedLists()

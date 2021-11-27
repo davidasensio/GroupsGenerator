@@ -1,18 +1,27 @@
 package com.handysparksoft.groupsgenerator.ui.screens.main
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 import com.handysparksoft.groupsgenerator.ui.shared.ConfirmDialog
@@ -27,33 +36,58 @@ fun MainScreen(
     viewModel.currentListPosition = listState.firstVisibleItemIndex
 
     MainScreenScaffold(viewModel = viewModel, onCreateClick = onCreateClick) { padding ->
-        LazyColumn(
-            state = listState,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding),
-            contentPadding = PaddingValues(24.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-            items(viewModel.aLists, key = { it.id }) { aList ->
-                val (selected, setSelected) = rememberSaveable(aList.id) { mutableStateOf(false) }
-                AListItem(
-                    aList = aList,
-                    selected = selected,
-                    onSelectedChange = { isSelected ->
-                        setSelected(isSelected)
-                        viewModel.addListToSelection(aList.id)
-                    },
-                    onClick = {
-                        if (selected) {
-                            setSelected(false)
-                            viewModel.removeListFromSelection(aList.id)
-                        } else {
-                            viewModel.clearSelection()
-                            onAListClick(aList)
-                        }
+        Column {
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .weight(1f),
+                contentPadding = PaddingValues(24.dp),
+                verticalArrangement = Arrangement.spacedBy(24.dp)
+            ) {
+                items(viewModel.aLists, key = { it.id }) { aList ->
+                    val (selected, setSelected) = rememberSaveable(aList.id) {
+                        mutableStateOf(false)
                     }
-                )
+                    AListItem(
+                        aList = aList,
+                        selected = selected,
+                        onSelectedChange = { isSelected ->
+                            setSelected(isSelected)
+                            viewModel.addListToSelection(aList.id)
+                        },
+                        onClick = {
+                            if (selected) {
+                                setSelected(false)
+                                viewModel.removeListFromSelection(aList.id)
+                            } else {
+                                viewModel.clearSelection()
+                                onAListClick(aList)
+                            }
+                        }
+                    )
+                }
+            }
+
+            AnimatedVisibility(
+                visible = viewModel.showEmptyView.value,
+                modifier = Modifier
+                    .align(CenterHorizontally)
+                    .padding(bottom = 36.dp, end = 100.dp)
+            ) {
+                Column {
+                    Text(
+                        text = "Create your first list!",
+                        style = MaterialTheme.typography.h6,
+                        color = MaterialTheme.colors.secondary.copy(alpha = 0.8f)
+                    )
+                    Image(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_hand_arrow),
+                        contentDescription = null,
+                        modifier = Modifier.padding(top = 16.dp)
+                    )
+                }
             }
         }
 
