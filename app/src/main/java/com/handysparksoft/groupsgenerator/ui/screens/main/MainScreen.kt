@@ -34,7 +34,7 @@ fun MainScreen(
             contentPadding = PaddingValues(24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            items(viewModel.aLists /*key = { it.id }*/) { aList ->
+            items(viewModel.aLists, key = { it.id }) { aList ->
                 val (selected, setSelected) = rememberSaveable(aList.id) { mutableStateOf(false) }
                 AListItem(
                     aList = aList,

@@ -30,7 +30,7 @@ fun MainScreenScaffold(
     Scaffold(
         topBar = {
             MainAppBar(
-                anySelected = viewModel.toolbarEditOptionsShown.value,
+                anySelected = viewModel.toolbarDeleteOptionShown.value,
                 onSortClick = {
                     viewModel.sortAlphabetically()
                 },

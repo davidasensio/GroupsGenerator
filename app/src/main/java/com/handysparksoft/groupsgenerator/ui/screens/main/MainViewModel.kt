@@ -19,23 +19,24 @@ class MainViewModel : ViewModel() {
             fabTextShown = value == 0 || value < currentListPosition
             field = value
         }
-    var toolbarEditOptionsShown = mutableStateOf(false)
+    var toolbarDeleteOptionShown = mutableStateOf(false)
     var orderAsc = true
 
     init {
         loadSavedLists()
     }
 
-    private fun loadSavedLists() {
+    fun loadSavedLists() {
         aLists.clear()
+        selectedALists.clear()
         val savedLists = App.prefs?.aLists ?: emptyList()
         aLists.addAll(savedLists)
     }
 
     fun addAList(aList: AList) {
-        clearSelection()
         aLists.add(aList)
         saveToPrefs()
+        loadSavedLists()
     }
 
     fun deleteSelected() {
@@ -62,7 +63,7 @@ class MainViewModel : ViewModel() {
     }
 
     private fun updateToolbarEditOptionsVisibility() {
-        toolbarEditOptionsShown.value = selectedALists.size > 0
+        toolbarDeleteOptionShown.value = selectedALists.size > 0
     }
 
     fun sortAlphabetically() {

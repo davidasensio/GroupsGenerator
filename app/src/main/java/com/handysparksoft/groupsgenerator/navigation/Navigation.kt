@@ -1,7 +1,6 @@
 package com.handysparksoft.groupsgenerator.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
@@ -32,6 +31,7 @@ fun Navigation(
                 },
                 onCreateClick = {
                     navController.navigate(NavItem.Create.baseRoute)
+                    mainViewModel.loadSavedLists()
                 }
             )
         }
@@ -40,7 +40,10 @@ fun Navigation(
             detailViewModel.aListId = listIdSelected
             DetailScreen(
                 viewModel = detailViewModel,
-                onUpClick = { navController.popBackStack() },
+                onUpClick = {
+                    mainViewModel.loadSavedLists()
+                    navController.popBackStack()
+                },
                 onGenerateClick = {
                     navController.navigate(
                         NavItem.Generate.createNavRoute(
@@ -55,6 +58,7 @@ fun Navigation(
                 onUpClick = { navController.popBackStack() },
                 onCreateClick = {
                     mainViewModel.addAList(it)
+                    mainViewModel.loadSavedLists()
                     navController.popBackStack()
                 }
             )
