@@ -35,18 +35,24 @@ class GenerateViewModel : ViewModel() {
     }
 
     fun generateRandomGroups(mode: Int, elementsNumber: Int) {
-        generatedGroups.clear()
         val participants = aList.participants.filter { !it.isDeactivated }
         val realParticipantsSize = aList.itemRealCount
         val elementsPerGroup = when (mode) {
             MODE_GROUPS -> realParticipantsSize / elementsNumber
             else -> elementsNumber
         }
-
-        var counter = 0
+        val maxGroups = when (mode) {
+            MODE_GROUPS -> elementsNumber
+            else -> participants.size
+        }
         val currentGroup = mutableListOf<Participant>()
+        var counter = 0
+
+        generatedGroups.clear()
+
         participants.shuffled().forEach {
-            if (counter >= elementsPerGroup) {
+            val neededNewGroup = counter >= elementsPerGroup && generatedGroups.size < maxGroups
+            if (neededNewGroup) {
                 generatedGroups.add(currentGroup.toMutableList())
                 currentGroup.clear()
                 counter = 0
@@ -57,7 +63,8 @@ class GenerateViewModel : ViewModel() {
 
         // Add the widow elements
         if (currentGroup.size > 0) {
-            if (generatedGroups.size < elementsNumber) {
+            val addWidowedToNewGroup = mode == MODE_ELEMENTS || generatedGroups.size < elementsNumber
+            if (addWidowedToNewGroup) {
                 generatedGroups.add(currentGroup)
             } else {
                 generatedGroups.last().addAll(currentGroup)
