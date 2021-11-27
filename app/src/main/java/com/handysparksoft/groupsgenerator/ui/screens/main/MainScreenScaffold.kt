@@ -30,12 +30,12 @@ fun MainScreenScaffold(
     Scaffold(
         topBar = {
             MainAppBar(
-                anySelected = viewModel.toolbarEditOptionsShown.value,
+                anySelected = viewModel.toolbarDeleteOptionShown.value,
                 onSortClick = {
                     viewModel.sortAlphabetically()
                 },
                 onDeleteClick = {
-                    viewModel.deleteSelected()
+                    viewModel.showDeleteConfirmDialog.value = true
                 },
                 onShareClick = {
                     (context as? Activity)?.let {

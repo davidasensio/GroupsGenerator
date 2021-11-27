@@ -48,7 +48,7 @@ fun AListItem(
         backgroundColor = getListColor(aList.id),
         border = getBorder(selected),
         modifier = Modifier
-            .shadow(shape = CardCornerShape, elevation = 2.dp)
+            .shadow(shape = CardCornerShape, elevation = if (selected) 8.dp else 1.dp)
             .combinedClickable(
                 onClick = onClick,
                 onLongClick = { onSelectedChange(!selected) }
