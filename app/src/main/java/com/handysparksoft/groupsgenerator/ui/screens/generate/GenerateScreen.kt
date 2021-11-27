@@ -6,6 +6,8 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -42,6 +44,8 @@ import com.handysparksoft.groupsgenerator.model.Participant
 import com.handysparksoft.groupsgenerator.platform.ShareIntentHandler
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 import com.handysparksoft.groupsgenerator.ui.shared.DropdownField
+import com.handysparksoft.groupsgenerator.ui.theme.GroupHeader
+import com.handysparksoft.groupsgenerator.ui.theme.GroupHeaderDark
 import kotlin.math.max
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
@@ -168,16 +172,24 @@ fun GroupCard(index: Int, group: List<Participant>) {
                 .fillMaxWidth()
                 .padding(vertical = 4.dp)
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column() {
                 Text(
                     text = "- Group $index -",
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h6,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            color = if (isSystemInDarkTheme()) GroupHeaderDark else GroupHeader
+                        )
+                        .padding(8.dp)
                 )
-                group.forEach {
-                    Text(text = it.name)
+
+                Column(modifier = Modifier.padding(16.dp)) {
+                    group.forEach {
+                        Text(text = it.name)
+                    }
                 }
             }
         }

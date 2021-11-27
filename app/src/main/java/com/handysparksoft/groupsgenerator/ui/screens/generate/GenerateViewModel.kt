@@ -63,7 +63,8 @@ class GenerateViewModel : ViewModel() {
 
         // Add the widow elements
         if (currentGroup.size > 0) {
-            val addWidowedToNewGroup = mode == MODE_ELEMENTS || generatedGroups.size < elementsNumber
+            val addWidowedToNewGroup =
+                mode == MODE_ELEMENTS || generatedGroups.size < elementsNumber
             if (addWidowedToNewGroup) {
                 generatedGroups.add(currentGroup)
             } else {
