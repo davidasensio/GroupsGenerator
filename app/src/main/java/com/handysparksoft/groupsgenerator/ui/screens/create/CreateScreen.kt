@@ -1,5 +1,8 @@
 package com.handysparksoft.groupsgenerator.ui.screens.create
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,9 +17,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,8 +35,12 @@ import java.util.UUID
 fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
     CreateScreenScaffold(onUpClick = onUpClick) {
 
-        val (name, setName) = remember { mutableStateOf("") }
-        val (description, setDescription) = remember { mutableStateOf("") }
+        val (name, setName) = rememberSaveable { mutableStateOf("") }
+        val (description, setDescription) = rememberSaveable { mutableStateOf("") }
+        val (illustrationIndex, setIllustrationIndex) = rememberSaveable { mutableStateOf(0) }
+        val (illustration, setIllustration) = rememberSaveable {
+            mutableStateOf(illustrations.last())
+        }
         val keyboardController = LocalSoftwareKeyboardController.current
 
         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 32.dp)) {
@@ -69,6 +79,21 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                         }
                     )
                 )
+                Image(
+                    painter = painterResource(id = illustration),
+                    contentDescription = "list illustration",
+                    modifier = Modifier
+                        .align(CenterHorizontally)
+                        .padding(top = 32.dp)
+                        .size(250.dp)
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null
+                        ) {
+                            setIllustrationIndex(illustrationIndex + 1)
+                            setIllustration(illustrations[illustrationIndex % illustrations.size])
+                        }
+                )
             }
             Button(
                 onClick = {
@@ -76,18 +101,23 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                         AList(
                             id = UUID.randomUUID().toString(),
                             name = name,
-                            description = description
+                            description = description,
+                            image = illustration
                         )
                     )
                 },
                 enabled = name.isNotBlank(),
-                modifier = Modifier.fillMaxWidth().height(48.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
             ) {
                 Text("Create")
             }
         }
     }
 }
+
+private val illustrations = ListIllustration.illustrations
 
 @Preview
 @Composable
