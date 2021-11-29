@@ -9,6 +9,9 @@ val Blue010 = Color(0XFFE6FFFF)
 val Blue100 = Color(0XFFB3E5FC)
 val Blue700 = Color(0XFF82B3C9)
 
+val BackgroundSecondary = Color(0xFFCACACA)
+val BackgroundSecondaryDark = Color(0xFF282828)
+
 val C01Green = Color(0XFFDCEDC8)
 val C02Orange = Color(0XFFFFECB3)
 val C03Red = Color(0xFFFFCCBC)
@@ -24,4 +27,4 @@ val C05PurpleDark = Color(0xFF3C2666)
 val C06PinkDark = Color(0xFF4D1A2B)
 
 val GroupHeader = C01Green
-val GroupHeaderDark = Color(0xFF121212)
+val GroupHeaderDark = BackgroundSecondaryDark
