@@ -20,7 +20,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.ui.shared.AppBarAction
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -50,7 +52,7 @@ fun AppBarOverflowMenu(
             DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
                 DropdownMenuItem(onClick = onShareClick) {
                     ListItem(
-                        text = { Text(text = "Share") },
+                        text = { Text(text = stringResource(R.string.action_share)) },
                         trailing = {
                             Icon(
                                 imageVector = Icons.Default.Share,
@@ -62,7 +64,7 @@ fun AppBarOverflowMenu(
                 }
                 DropdownMenuItem(onClick = onRateClick) {
                     ListItem(
-                        text = { Text(text = "Rate") },
+                        text = { Text(text = stringResource(R.string.action_rate)) },
                         trailing = {
                             Icon(
                                 imageVector = Icons.Default.StarRate,

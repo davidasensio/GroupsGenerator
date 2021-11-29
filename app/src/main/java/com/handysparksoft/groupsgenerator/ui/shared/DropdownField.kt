@@ -8,6 +8,8 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.handysparksoft.groupsgenerator.R
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -18,7 +20,7 @@ fun DropdownField(
     onSelectedOptionTextChange: (String) -> Unit,
     options: List<String>,
     modifier: Modifier = Modifier,
-    label: String = "Label"
+    label: String = stringResource(R.string.dropdown_label)
 ) {
     ExposedDropdownMenuBox(
         expanded = expanded,

@@ -4,6 +4,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.ui.shared.AppBarAction
 
 @Composable
@@ -14,11 +16,11 @@ fun GenerateAppBarOverflowMenu(
     AppBarAction(
         imageVector = Icons.Default.ContentCopy,
         onClick = onCopyGroupsClick,
-        contentDescription = "Copy groups"
+        contentDescription = stringResource(R.string.generate_copy_groups)
     )
     AppBarAction(
         imageVector = Icons.Default.Share,
         onClick = onShareGeneratedGroupsClick,
-        contentDescription = "Share groups"
+        contentDescription = stringResource(R.string.generate_share_groups)
     )
 }

@@ -21,11 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.ui.theme.C01Green
 import com.handysparksoft.groupsgenerator.ui.theme.C01GreenDark
@@ -123,7 +125,7 @@ private fun ListDescription(description: String) {
 private fun ListInfo(aList: AList) {
     Box() {
         Text(
-            text = "${aList.participants.size} participants",
+            text = stringResource(id = R.string.number_participants, aList.participants.size),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.overline,
             fontSize = 16.sp,

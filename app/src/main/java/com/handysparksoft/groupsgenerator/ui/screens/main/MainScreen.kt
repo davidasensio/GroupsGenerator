@@ -18,6 +18,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -78,7 +79,7 @@ fun MainScreen(
             ) {
                 Column {
                     Text(
-                        text = "Create your first list!",
+                        text = stringResource(R.string.main_create_your_first_list),
                         style = MaterialTheme.typography.h6,
                         color = MaterialTheme.colors.secondary.copy(alpha = 0.8f)
                     )
@@ -95,8 +96,8 @@ fun MainScreen(
             ConfirmDialog(
                 showDialog = viewModel.showDeleteConfirmDialog.value,
                 onShowDialogChange = { viewModel.showDeleteConfirmDialog.value = it },
-                title = "Confirm",
-                text = "Delete selected lists?",
+                title = stringResource(R.string.action_confirm),
+                text = stringResource(R.string.question_delete_selected_lists),
                 onConfirmClick = { viewModel.deleteSelected() },
                 onDismissClick = { viewModel.showDeleteConfirmDialog.value = false }
             )

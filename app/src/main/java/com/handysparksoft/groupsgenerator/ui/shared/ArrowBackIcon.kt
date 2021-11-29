@@ -14,7 +14,7 @@ fun ArrowBackIcon(onUpClick: () -> Unit) {
         Icon(
             imageVector = Icons.Default.ArrowBack,
             contentDescription = stringResource(
-                id = R.string.up_action_top_bar
+                id = R.string.action_up_top_bar
             )
         )
     }
