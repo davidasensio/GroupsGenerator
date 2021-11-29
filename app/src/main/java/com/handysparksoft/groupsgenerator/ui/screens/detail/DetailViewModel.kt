@@ -39,6 +39,8 @@ class DetailViewModel : ViewModel() {
     val currentEditParticipant: Participant?
         get() = participants.getOrNull(currentEditPosition)
 
+    private var orderAsc = true
+
     fun addParticipant(participant: Participant) {
         participants.add(participant)
         saveToPrefs()
@@ -65,6 +67,15 @@ class DetailViewModel : ViewModel() {
         }
         participants[currentEditPosition] = participant
         saveToPrefs()
+    }
+
+    fun sortAlphabetically() {
+        if (orderAsc) {
+            participants.sortBy { it.name }
+        } else {
+            participants.sortByDescending { it.name }
+        }
+        orderAsc = !orderAsc
     }
 
     private fun saveToPrefs() {

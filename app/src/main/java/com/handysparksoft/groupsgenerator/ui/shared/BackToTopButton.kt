@@ -13,7 +13,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.handysparksoft.groupsgenerator.R
 
 @Composable
 fun BackToTopButton(
@@ -33,7 +35,7 @@ fun BackToTopButton(
             modifier = Modifier.height(48.dp)
         ) {
             Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
-            Text(text = "Back to top")
+            Text(text = stringResource(R.string.action_back_to_top))
         }
     }
 }

@@ -23,12 +23,14 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
-import java.util.UUID
+import java.util.UUID as UniqueIdentifier
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -48,8 +50,8 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = setName,
-                    label = { Text(text = "Name") },
-                    placeholder = { Text(text = "Type the list name") },
+                    label = { Text(text = stringResource(R.string.create_name_label)) },
+                    placeholder = { Text(text = stringResource(R.string.create_name_placeholder)) },
                     modifier = Modifier
                         .fillMaxWidth(),
                     maxLines = 1,
@@ -66,8 +68,10 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                 OutlinedTextField(
                     value = description,
                     onValueChange = setDescription,
-                    label = { Text(text = "Description") },
-                    placeholder = { Text(text = "Type a description for this list") },
+                    label = { Text(text = stringResource(R.string.create_description_label)) },
+                    placeholder = {
+                        Text(text = stringResource(R.string.create_description_placeholder))
+                    },
                     maxLines = 5,
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Default),
@@ -81,11 +85,11 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                 )
                 Image(
                     painter = painterResource(id = illustration),
-                    contentDescription = "list illustration",
+                    contentDescription = stringResource(R.string.create_list_illustration),
                     modifier = Modifier
                         .align(CenterHorizontally)
-                        .padding(top = 32.dp)
-                        .size(250.dp)
+                        .size(300.dp)
+                        .padding(32.dp)
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null
@@ -99,7 +103,7 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                 onClick = {
                     onCreateClick(
                         AList(
-                            id = UUID.randomUUID().toString(),
+                            id = UniqueIdentifier.randomUUID().toString(),
                             name = name,
                             description = description,
                             image = illustration
@@ -111,7 +115,7 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                     .fillMaxWidth()
                     .height(48.dp)
             ) {
-                Text("Create")
+                Text(stringResource(R.string.action_create))
             }
         }
     }

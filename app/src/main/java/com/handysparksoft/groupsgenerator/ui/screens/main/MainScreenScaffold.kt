@@ -16,7 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.platform.ShareIntentHandler
 
 @Composable
@@ -57,10 +59,10 @@ fun MainScreenScaffold(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Add a list",
+                        contentDescription = stringResource(R.string.main_add_new_list),
                     )
                     AnimatedVisibility(visible = viewModel.fabTextShown) {
-                        Text(text = "Add new list")
+                        Text(text = stringResource(R.string.main_add_new_list))
                     }
                 }
             }

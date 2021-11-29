@@ -51,11 +51,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.model.Participant
 import com.handysparksoft.groupsgenerator.model.ParticipantTypeIcon
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 import com.handysparksoft.groupsgenerator.ui.shared.BackToTopButton
-import java.util.UUID
+import java.util.UUID as UniqueIdentifier
 import kotlinx.coroutines.launch
 
 @Composable
@@ -97,7 +98,7 @@ private fun ParticipantsList(
         } else {
             Surface(color = MaterialTheme.colors.onSurface.copy(alpha = 0.05f)) {
                 Text(
-                    text = "Editing participant",
+                    text = stringResource(R.string.detail_edit_participant),
                     style = MaterialTheme.typography.h6,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
@@ -107,7 +108,6 @@ private fun ParticipantsList(
             }
         }
 
-        Spacer(modifier = Modifier.padding(16.dp))
         ListParticipants(
             participants = participants,
             onRemoveParticipant = onRemoveParticipant,
@@ -137,7 +137,7 @@ private fun ParticipantEntryItemInput(onAddParticipant: (Participant) -> Unit) {
     val submit = {
         onAddParticipant(
             Participant(
-                id = UUID.randomUUID().toString(),
+                id = UniqueIdentifier.randomUUID().toString(),
                 name = text,
                 icon = icon,
                 isCouple = icon == ParticipantTypeIcon.Couple,
@@ -175,7 +175,6 @@ fun ParticipantItemInput(
             verticalAlignment = CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-            // .background(color = MaterialTheme.colors.onSurface.copy(alpha = 0.5f))
         ) {
             ParticipantInputText(
                 text = text,
@@ -185,16 +184,12 @@ fun ParticipantItemInput(
             )
             buttonSlot()
         }
-        // if (iconsVisible) {
         AnimatedIconRow(
             icon = icon,
             onIconChange = onIconChange,
             modifier = Modifier.padding(top = 8.dp),
             visible = iconsVisible
         )
-        // } else {
-        //     Spacer(modifier = Modifier.size(16.dp))
-        // }
     }
 }
 
@@ -212,8 +207,8 @@ private fun ParticipantInputText(
         value = text,
         onValueChange = setText,
         colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),
-        label = { Text(text = "Participant name") },
-        placeholder = { Text(text = "Type participant's name") },
+        label = { Text(text = stringResource(R.string.detail_participant_name_label)) },
+        placeholder = { Text(text = stringResource(R.string.detail_participant_name_placeholder)) },
         maxLines = 1,
         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
         keyboardActions = KeyboardActions(
@@ -242,7 +237,7 @@ private fun ParticipantAddButton(onClick: () -> Unit, isEnabled: Boolean) {
                 contentDescription = null,
                 modifier = Modifier.padding(end = 8.dp)
             )
-            Text(text = "Add")
+            Text(text = stringResource(R.string.action_add))
         }
     }
 }
@@ -254,7 +249,7 @@ fun AnimatedIconRow(
     modifier: Modifier = Modifier,
     visible: Boolean = true
 ) {
-    Box(modifier = Modifier.defaultMinSize(16.dp)) {
+    Box(modifier = Modifier.defaultMinSize(minHeight = 56.dp)) {
         AnimatedVisibility(
             visible = visible,
             enter = fadeIn(),
@@ -414,7 +409,7 @@ private fun ListParticipants(
 @Composable
 private fun DeactivatedHeader() {
     Text(
-        text = "Deactivated",
+        text = stringResource(R.string.deactivated),
         color = MaterialTheme.colors.onSurface.copy(alpha = 0.5f),
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.button,
@@ -435,12 +430,12 @@ private fun ListInfo(participants: List<Participant>) {
     Box(
         Modifier
             .fillMaxWidth()
-            .height(48.dp),
+            .padding(24.dp),
         contentAlignment = Center
     ) {
 //        Thumb(aList = aList)
         Text(
-            text = "$countValue Participants",
+            text = stringResource(id = R.string.number_participants, countValue),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.h6,
         )
@@ -459,7 +454,7 @@ private fun GenerateGroupsButton(
             .height(48.dp),
         enabled = participants.filter { !it.isDeactivated }.size > 1
     ) {
-        Text(text = "Generate groups")
+        Text(text = stringResource(R.string.detail_generate_groups))
     }
 }
 

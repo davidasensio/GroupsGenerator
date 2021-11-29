@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Agrupados App</string>
-    <string name="up_action_top_bar">Volver a la pantalla anterior</string>
 
     <string name="type_participant">Participante</string>
     <string name="type_couple">Pareja</string>
@@ -17,6 +16,49 @@
     <string name="share_app_content">Descarga Agrupados y genera grupos aleatorios fácilmente.</string>
     <string name="share_app_google_play_url" translatable="false">https://play.google.com/store/apps/details?id=com.handysparksoft.groupsgenerator</string>
 
+
     <string name="intent_contact_subject">[Grouped] Contact info</string>
     <string name="intent_contact_text">Hola equipo de Agrupados,\n\n -> Tu info aquí…\n\n Saludos.</string>
+
+    <string name="action_share">Compartir</string>
+    <string name="action_rate">Votar</string>
+    <string name="action_up_top_bar">Volver a la pantalla anterior</string>
+    <string name="action_confirm">Confirmar</string>
+    <string name="action_add">Añadir</string>
+    <string name="action_back_to_top">Volver arriba</string>
+    <string name="action_create">Crear</string>
+
+    <string name="dialog_accept">ACEPTAR</string>
+    <string name="dialog_dismiss">DESCARTAR</string>
+
+    <string name="question_delete_selected_lists">¿Borrar listas seleccionadas?</string>
+    <string name="number_participants">%1$d participantes</string>
+
+    <string name="dropdown_label">Etiqueta</string>
+
+    <string name="main_create_your_first_list">Crea tu primera lista!</string>
+    <string name="main_add_new_list">Añade una nueva lista</string>
+
+    <string name="detail_edit_participant">Editando participante</string>
+    <string name="detail_participant_name_label">Nombre del participante</string>
+    <string name="detail_participant_name_placeholder">Escribe el nombre</string>
+    <string name="detail_generate_groups">Generar grupos</string>
+    <string name="deactivated">Desactivados</string>
+
+    <string name="create_name_label">Nombre</string>
+    <string name="create_name_placeholder">Escribe el nombre de la lista</string>
+    <string name="create_description_label">Descripción</string>
+    <string name="create_description_placeholder">Escribe la descripciópn para esta lista</string>
+    <string name="create_list_illustration">Lista de ilustraciones</string>
+    <string name="create_create_new_list_title">Crea una lista</string>
+
+    <string name="generate_random_generation">Generación aleatoria</string>
+    <string name="generate_copy_groups">Copiear grupos</string>
+    <string name="generate_share_groups">Compartir groups</string>
+    <string name="generate_groups_title">Generar grupos</string>
+    <string name="generate_mode_number_of_groups">Número de groups</string>
+    <string name="generate_mode_participants_per_group">Número de participantes por group</string>
+    <string name="generate_copied_to_clipboard">Grupos copiados al portapapeles</string>
+    <string name="generate_mode_label">Mode de generación</string>
+    <string name="generate_group_title">- Grupo %1$d -</string>
 </resources>

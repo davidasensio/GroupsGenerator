@@ -5,8 +5,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.handysparksoft.groupsgenerator.R
 
 @Composable
 fun ConfirmDialog(
@@ -16,8 +18,8 @@ fun ConfirmDialog(
     text: String,
     onConfirmClick: () -> Unit,
     onDismissClick: () -> Unit,
-    confirmButtonText: String = "ACCEPT",
-    dismissButtonText: String = "DISMISS",
+    confirmButtonText: String = stringResource(R.string.dialog_accept),
+    dismissButtonText: String = stringResource(R.string.dialog_dismiss),
 ) {
     if (showDialog) {
         AlertDialog(

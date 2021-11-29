@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Grouped App</string>
-    <string name="up_action_top_bar">Up to previous screen</string>
 
     <string name="type_participant">Participant</string>
     <string name="type_couple">Couple</string>
@@ -19,4 +18,46 @@
     <string name="intent_contact_email" translatable="false">handysparksoft@gmail.com</string>
     <string name="intent_contact_subject">[Grouped] Contact info</string>
     <string name="intent_contact_text">Hi Grouped team,\n\n -> Your info here…\n\n Cheers.</string>
+
+    <string name="action_share">Share</string>
+    <string name="action_rate">Rate</string>
+    <string name="action_up_top_bar">Up to previous screen</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="action_add">Add</string>
+    <string name="action_back_to_top">Back to top</string>
+    <string name="action_create">Create</string>
+
+    <string name="dialog_accept">ACCEPT</string>
+    <string name="dialog_dismiss">DISMISS</string>
+
+    <string name="question_delete_selected_lists">Delete selected lists?</string>
+    <string name="number_participants">%1$d participants</string>
+
+    <string name="dropdown_label">Label</string>
+
+    <string name="main_create_your_first_list">Create your first list!</string>
+    <string name="main_add_new_list">Add new list</string>
+
+    <string name="detail_edit_participant">Editing participant</string>
+    <string name="detail_participant_name_label">Participant name</string>
+    <string name="detail_participant_name_placeholder">Type participant\'s name</string>
+    <string name="detail_generate_groups">Generate groups</string>
+    <string name="deactivated">Deactivated</string>
+
+    <string name="create_name_label">Name</string>
+    <string name="create_name_placeholder">Type the list name</string>
+    <string name="create_description_label">Description</string>
+    <string name="create_description_placeholder">Type a description for this list</string>
+    <string name="create_list_illustration">list illustration</string>
+    <string name="create_create_new_list_title">Create new list</string>
+
+    <string name="generate_random_generation">Random generation</string>
+    <string name="generate_copy_groups">Copy groups</string>
+    <string name="generate_share_groups">Share groups</string>
+    <string name="generate_groups_title">Generate groups</string>
+    <string name="generate_mode_number_of_groups">Number of groups</string>
+    <string name="generate_mode_participants_per_group">Number of participants per group</string>
+    <string name="generate_copied_to_clipboard">Groups copied to clipboard</string>
+    <string name="generate_mode_label">Generation mode</string>
+    <string name="generate_group_title">- Group %1$d -</string>
 </resources>
