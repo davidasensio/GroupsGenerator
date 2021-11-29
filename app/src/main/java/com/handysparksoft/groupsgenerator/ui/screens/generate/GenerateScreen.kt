@@ -6,6 +6,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
@@ -17,8 +18,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -208,35 +210,47 @@ fun GenerateScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ListOfGeneratedGroups(
     listState: LazyListState,
     viewModel: GenerateViewModel,
-    optionsSectionHeight: Dp
+    optionsSectionHeight: Dp,
 ) {
-    LazyColumn(
+    LazyVerticalGrid(
+        cells = GridCells.Fixed(2),
         state = listState,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp),
+            .padding(8.dp),
+        contentPadding = PaddingValues(bottom = 60.dp, top = optionsSectionHeight)
+    ) {
+        itemsIndexed(viewModel.generatedGroups) { index, group ->
+            GroupCard(index + 1, group, modifier = Modifier.padding(4.dp))
+        }
+    }
+    /*LazyColumn(
+        state = listState,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp),
         contentPadding = PaddingValues(bottom = 60.dp, top = optionsSectionHeight)
     ) {
         itemsIndexed(viewModel.generatedGroups) { index, group ->
             GroupCard(index + 1, group)
         }
-    }
+    }*/
 }
 
 @Composable
-fun GroupCard(index: Int, group: List<Participant>) {
+fun GroupCard(index: Int, group: List<Participant>, modifier: Modifier = Modifier) {
     SelectionContainer() {
         Card(
             shape = RoundedCornerShape(4.dp),
             elevation = 0.dp,
             border = BorderStroke(width = 1.dp, color = Color.LightGray),
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
-                .padding(vertical = 4.dp)
         ) {
             Column() {
                 Text(
