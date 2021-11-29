@@ -16,5 +16,12 @@ val C04Blue = Color(0XFFB2EBF2)
 val C05Purple = Color(0XFFD1C4E9)
 val C06Pink = Color(0XFFF8BBD0)
 
+val C01GreenDark = Color(0xFF566640)
+val C02OrangeDark = Color(0xFF584C22)
+val C03RedDark = Color(0xFF693423)
+val C04BlueDark = Color(0xFF1C585F)
+val C05PurpleDark = Color(0xFF3C2666)
+val C06PinkDark = Color(0xFF4D1A2B)
+
 val GroupHeader = C01Green
 val GroupHeaderDark = Color(0xFF121212)

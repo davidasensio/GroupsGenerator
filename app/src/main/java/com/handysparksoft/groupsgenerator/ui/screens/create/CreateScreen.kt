@@ -84,8 +84,8 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                     contentDescription = "list illustration",
                     modifier = Modifier
                         .align(CenterHorizontally)
-                        .padding(top = 32.dp)
-                        .size(250.dp)
+                        .size(300.dp)
+                        .padding(32.dp)
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null

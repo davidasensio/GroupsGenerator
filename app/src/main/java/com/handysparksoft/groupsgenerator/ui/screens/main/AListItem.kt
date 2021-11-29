@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,11 +28,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.ui.theme.C01Green
+import com.handysparksoft.groupsgenerator.ui.theme.C01GreenDark
 import com.handysparksoft.groupsgenerator.ui.theme.C02Orange
+import com.handysparksoft.groupsgenerator.ui.theme.C02OrangeDark
 import com.handysparksoft.groupsgenerator.ui.theme.C03Red
+import com.handysparksoft.groupsgenerator.ui.theme.C03RedDark
 import com.handysparksoft.groupsgenerator.ui.theme.C04Blue
+import com.handysparksoft.groupsgenerator.ui.theme.C04BlueDark
 import com.handysparksoft.groupsgenerator.ui.theme.C05Purple
+import com.handysparksoft.groupsgenerator.ui.theme.C05PurpleDark
 import com.handysparksoft.groupsgenerator.ui.theme.C06Pink
+import com.handysparksoft.groupsgenerator.ui.theme.C06PinkDark
 import kotlin.math.abs
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -45,7 +52,7 @@ fun AListItem(
     Card(
         shape = CardCornerShape,
         elevation = 0.dp,
-        backgroundColor = getListColor(aList.id),
+        backgroundColor = getListColor(aList.id, isSystemInDarkTheme()),
         border = getBorder(selected),
         modifier = Modifier
             .shadow(shape = CardCornerShape, elevation = if (selected) 8.dp else 1.dp)
@@ -83,7 +90,10 @@ private fun getBorder(selected: Boolean) = when (selected) {
     false -> BorderStroke(1.dp, color = MaterialTheme.colors.primary)
 }
 
-fun getListColor(listId: String): Color = CardColors[abs(listId.hashCode()) % CardColors.size]
+fun getListColor(listId: String, systemInDarkTheme: Boolean): Color = when (systemInDarkTheme) {
+    true -> CardColorsDark[abs(listId.hashCode()) % CardColors.size]
+    false -> CardColors[abs(listId.hashCode()) % CardColors.size]
+}
 
 @Composable
 private fun ListTitle(title: String) {
@@ -138,4 +148,19 @@ fun GroupItemPreview() {
 }
 
 private val CardCornerShape = CutCornerShape(24.dp, 0.dp, 24.dp, 0.dp)
-private val CardColors = listOf(C01Green, C02Orange, C03Red, C04Blue, C05Purple, C06Pink)
+private val CardColors = listOf(
+    C01Green,
+    C02Orange,
+    C03Red,
+    C04Blue,
+    C05Purple,
+    C06Pink
+)
+private val CardColorsDark = listOf(
+    C01GreenDark,
+    C02OrangeDark,
+    C03RedDark,
+    C04BlueDark,
+    C05PurpleDark,
+    C06PinkDark
+)
