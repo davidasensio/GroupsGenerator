@@ -4,7 +4,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.SortByAlpha
 import androidx.compose.runtime.Composable
+import com.handysparksoft.groupsgenerator.ui.shared.AppBarAction
 import com.handysparksoft.groupsgenerator.ui.shared.ArrowBackIcon
 
 @Composable
@@ -17,7 +20,13 @@ fun DetailScreenScaffold(
         topBar = {
             TopAppBar(
                 title = { Text(viewModel.listName) },
-                navigationIcon = { ArrowBackIcon(onUpClick) }
+                navigationIcon = { ArrowBackIcon(onUpClick) },
+                actions = {
+                    AppBarAction(
+                        imageVector = Icons.Default.SortByAlpha,
+                        onClick = { viewModel.sortAlphabetically() }
+                    )
+                }
             )
         },
         content = content

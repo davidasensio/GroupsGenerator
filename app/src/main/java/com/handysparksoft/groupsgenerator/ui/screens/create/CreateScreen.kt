@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
-import java.util.UUID
+import java.util.UUID as UniqueIdentifier
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -99,7 +99,7 @@ fun CreateScreen(onUpClick: () -> Unit, onCreateClick: (AList) -> Unit) {
                 onClick = {
                     onCreateClick(
                         AList(
-                            id = UUID.randomUUID().toString(),
+                            id = UniqueIdentifier.randomUUID().toString(),
                             name = name,
                             description = description,
                             image = illustration

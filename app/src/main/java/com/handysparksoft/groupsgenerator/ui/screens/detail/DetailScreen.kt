@@ -55,7 +55,7 @@ import com.handysparksoft.groupsgenerator.model.Participant
 import com.handysparksoft.groupsgenerator.model.ParticipantTypeIcon
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 import com.handysparksoft.groupsgenerator.ui.shared.BackToTopButton
-import java.util.UUID
+import java.util.UUID as UniqueIdentifier
 import kotlinx.coroutines.launch
 
 @Composable
@@ -107,7 +107,6 @@ private fun ParticipantsList(
             }
         }
 
-        Spacer(modifier = Modifier.padding(16.dp))
         ListParticipants(
             participants = participants,
             onRemoveParticipant = onRemoveParticipant,
@@ -137,7 +136,7 @@ private fun ParticipantEntryItemInput(onAddParticipant: (Participant) -> Unit) {
     val submit = {
         onAddParticipant(
             Participant(
-                id = UUID.randomUUID().toString(),
+                id = UniqueIdentifier.randomUUID().toString(),
                 name = text,
                 icon = icon,
                 isCouple = icon == ParticipantTypeIcon.Couple,
@@ -254,7 +253,7 @@ fun AnimatedIconRow(
     modifier: Modifier = Modifier,
     visible: Boolean = true
 ) {
-    Box(modifier = Modifier.defaultMinSize(16.dp)) {
+    Box(modifier = Modifier.defaultMinSize(minHeight = 56.dp)) {
         AnimatedVisibility(
             visible = visible,
             enter = fadeIn(),
@@ -435,7 +434,7 @@ private fun ListInfo(participants: List<Participant>) {
     Box(
         Modifier
             .fillMaxWidth()
-            .height(48.dp),
+            .padding(24.dp),
         contentAlignment = Center
     ) {
 //        Thumb(aList = aList)

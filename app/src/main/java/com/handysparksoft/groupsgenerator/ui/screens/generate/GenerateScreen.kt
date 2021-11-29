@@ -51,6 +51,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
@@ -243,7 +244,7 @@ private fun ListOfGeneratedGroups(
 }
 
 @Composable
-fun GroupCard(index: Int, group: List<Participant>, modifier: Modifier = Modifier) {
+fun GroupCard(index: Int, participants: List<Participant>, modifier: Modifier = Modifier) {
     SelectionContainer() {
         Card(
             shape = RoundedCornerShape(4.dp),
@@ -267,8 +268,12 @@ fun GroupCard(index: Int, group: List<Participant>, modifier: Modifier = Modifie
                 )
 
                 Column(modifier = Modifier.padding(16.dp)) {
-                    group.forEach {
-                        Text(text = it.name)
+                    participants.forEach {
+                        Text(
+                            text = it.name,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
                     }
                 }
             }
