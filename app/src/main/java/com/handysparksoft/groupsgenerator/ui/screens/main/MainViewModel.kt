@@ -4,12 +4,11 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.handysparksoft.groupsgenerator.App
+import androidx.lifecycle.ViewModelProvider
+import com.handysparksoft.groupsgenerator.data.Prefs
 import com.handysparksoft.groupsgenerator.model.AList
 
-class MainViewModel : ViewModel() {
-    var aLists = mutableStateListOf<AList>()
-        private set
+class MainViewModel(private val prefs: Prefs?) : ViewModel() {
 
     var selectedALists = mutableStateListOf<String>()
         private set
@@ -79,6 +78,16 @@ class MainViewModel : ViewModel() {
     }
 
     private fun saveToPrefs() {
-        App.prefs?.aLists = aLists
+        prefs?.aLists = aLists
+    }
+
+    companion object {
+        // Factory for MainViewModel that takes Preferences as a dependency
+        fun provideFactory(prefs: Prefs?) = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return MainViewModel(prefs) as T
+            }
+        }
     }
 }

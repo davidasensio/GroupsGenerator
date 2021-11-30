@@ -12,7 +12,9 @@ import com.handysparksoft.groupsgenerator.ui.screens.generate.GenerateViewModel
 import com.handysparksoft.groupsgenerator.ui.screens.main.MainViewModel
 
 class MainActivity : ComponentActivity() {
-    private val mainViewModel by viewModels<MainViewModel>()
+    private val mainViewModel: MainViewModel by viewModels {
+        MainViewModel.provideFactory(App.prefs)
+    }
     private val detailViewModel by viewModels<DetailViewModel>()
     private val generateViewModel by viewModels<GenerateViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
