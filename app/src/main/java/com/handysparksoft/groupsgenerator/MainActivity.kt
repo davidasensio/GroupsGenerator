@@ -17,6 +17,7 @@ class MainActivity : ComponentActivity() {
     }
     private val detailViewModel by viewModels<DetailViewModel>()
     private val generateViewModel by viewModels<GenerateViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)

@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.handysparksoft.groupsgenerator.model.AList
 
-class Prefs(context: Context) {
+open class Prefs(context: Context) {
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     var aLists: List<AList>

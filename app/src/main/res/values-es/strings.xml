@@ -37,7 +37,7 @@
     <string name="dropdown_label">Etiqueta</string>
 
     <string name="main_create_your_first_list">Crea tu primera lista!</string>
-    <string name="main_add_new_list">Añade una nueva lista</string>
+    <string name="main_add_new_list">Añade nueva lista</string>
 
     <string name="detail_edit_participant">Editando participante</string>
     <string name="detail_participant_name_label">Nombre del participante</string>

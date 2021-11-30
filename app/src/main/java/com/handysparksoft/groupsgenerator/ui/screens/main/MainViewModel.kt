@@ -9,6 +9,8 @@ import com.handysparksoft.groupsgenerator.data.Prefs
 import com.handysparksoft.groupsgenerator.model.AList
 
 class MainViewModel(private val prefs: Prefs?) : ViewModel() {
+    var aLists = mutableStateListOf<AList>()
+        private set
 
     var selectedALists = mutableStateListOf<String>()
         private set
@@ -20,19 +22,25 @@ class MainViewModel(private val prefs: Prefs?) : ViewModel() {
             field = value
         }
     var toolbarDeleteOptionShown = mutableStateOf(false)
-    var orderAsc = true
     var showDeleteConfirmDialog = mutableStateOf(false)
     var showEmptyView = derivedStateOf { aLists.isEmpty() }
+    private var orderAsc = true
 
     init {
         loadSavedLists()
     }
 
-    fun loadSavedLists() {
+    fun getLists() = aLists.toList()
+
+    private fun setLists(theLists: List<AList>) {
         aLists.clear()
-        selectedALists.clear()
-        val savedLists = App.prefs?.aLists ?: emptyList()
-        aLists.addAll(savedLists)
+        aLists.addAll(theLists)
+    }
+
+    fun loadSavedLists() {
+        clearSelection()
+        val savedLists = prefs?.aLists ?: emptyList()
+        setLists(savedLists)
     }
 
     fun addAList(aList: AList) {
