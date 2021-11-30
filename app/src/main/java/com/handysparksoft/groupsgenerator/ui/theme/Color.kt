@@ -9,8 +9,10 @@ val Blue010 = Color(0XFFE6FFFF)
 val Blue100 = Color(0XFFB3E5FC)
 val Blue700 = Color(0XFF82B3C9)
 
-val BackgroundSecondary = Color(0xFFCACACA)
-val BackgroundSecondaryDark = Color(0xFF282828)
+val BackgroundSecondary = Color(0xFFF9FAFA)
+val BackgroundSecondaryDark = Color(0xFF212A36)
+val BackgroundTertiary = Color(0xFFF4F4F5)
+val BackgroundTertiaryDark = Color(0xFF293545)
 
 val C01Green = Color(0XFFDCEDC8)
 val C02Orange = Color(0XFFFFECB3)

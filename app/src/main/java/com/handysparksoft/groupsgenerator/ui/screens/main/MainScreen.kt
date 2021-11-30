@@ -18,11 +18,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.handysparksoft.groupsgenerator.R
+import com.handysparksoft.groupsgenerator.data.Prefs
 import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 import com.handysparksoft.groupsgenerator.ui.shared.ConfirmDialog
@@ -110,7 +112,7 @@ fun MainScreen(
 fun MainScreenPreview() {
     GroupsGeneratorApp {
         MainScreen(
-            viewModel = MainViewModel(),
+            viewModel = MainViewModel(Prefs(LocalContext.current)),
             onAListClick = {},
             onCreateClick = {}
         )

@@ -6,7 +6,7 @@ import org.junit.Test
 
 class DetailViewModelTest {
     @Test
-    fun whenAddParticipant_updateList() {
+    fun `when add participant should updatelist`() {
         val subject = DetailViewModel()
         val expected = Participant("1", "Participant 1")
         subject.addParticipant(expected)
@@ -14,7 +14,7 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun whenRemovingParticipant_updateList() {
+    fun `when removing participant should updatelist`() {
         val viewModel = DetailViewModel()
         val participant1 = Participant("1", "Participant 1")
         val participant2 = Participant("2", "Participant 2")
@@ -27,7 +27,7 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun whenNotEditing_currentEditParticipantIsNull() {
+    fun `when not editing currenteditparticipant should be null`() {
         val subject = DetailViewModel()
         val participant1 = Participant("1", "Participant 1")
         subject.addParticipant(participant1)
@@ -35,7 +35,7 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun whenEditing_currentEditParticipantIsCorrect() {
+    fun `when editing currenteditparticipant should be correct`() {
         val subject = DetailViewModel()
         val participant1 = Participant("1", "Participant 1")
         val participant2 = Participant("2", "Participant 2")
@@ -46,7 +46,7 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun whenEditDone_currentEditParticipantIsCorrect() {
+    fun `when edit done currenteditparticipant should be correct`() {
         val subject = DetailViewModel()
         val participant1 = Participant("1", "Participant 1")
         val participant2 = Participant("2", "Participant 2")
@@ -58,7 +58,7 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun whenEditing_updatesAreShownInParticipantAndList() {
+    fun `when editing updates are shown in participant and list`() {
         val subject = DetailViewModel()
         val participant1 = Participant("1", "Participant 1")
         val participant2 = Participant("2", "Participant 2")
@@ -72,7 +72,7 @@ class DetailViewModelTest {
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun whenEditing_wrongParticipantThrows() {
+    fun `when editing wrong participant should throw exception`() {
         val subject = DetailViewModel()
         val participant1 = Participant("1", "Participant 1")
         val participant2 = Participant("2", "Participant 2")
@@ -84,7 +84,7 @@ class DetailViewModelTest {
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun whenNotEditing_onParticipantEditChangeThrows() {
+    fun `when not editing on participant then edit change should throw exception`() {
         val subject = DetailViewModel()
         val participant1 = Participant("1", "Participant 1")
         subject.onEditParticipantChange(participant1)

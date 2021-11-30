@@ -4,10 +4,11 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.handysparksoft.groupsgenerator.App
+import androidx.lifecycle.ViewModelProvider
+import com.handysparksoft.groupsgenerator.data.Prefs
 import com.handysparksoft.groupsgenerator.model.AList
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val prefs: Prefs?) : ViewModel() {
     var aLists = mutableStateListOf<AList>()
         private set
 
@@ -21,19 +22,25 @@ class MainViewModel : ViewModel() {
             field = value
         }
     var toolbarDeleteOptionShown = mutableStateOf(false)
-    var orderAsc = true
     var showDeleteConfirmDialog = mutableStateOf(false)
     var showEmptyView = derivedStateOf { aLists.isEmpty() }
+    private var orderAsc = true
 
     init {
         loadSavedLists()
     }
 
-    fun loadSavedLists() {
+    fun getLists() = aLists.toList()
+
+    private fun setLists(theLists: List<AList>) {
         aLists.clear()
-        selectedALists.clear()
-        val savedLists = App.prefs?.aLists ?: emptyList()
-        aLists.addAll(savedLists)
+        aLists.addAll(theLists)
+    }
+
+    fun loadSavedLists() {
+        clearSelection()
+        val savedLists = prefs?.aLists ?: emptyList()
+        setLists(savedLists)
     }
 
     fun addAList(aList: AList) {
@@ -79,6 +86,16 @@ class MainViewModel : ViewModel() {
     }
 
     private fun saveToPrefs() {
-        App.prefs?.aLists = aLists
+        prefs?.aLists = aLists
+    }
+
+    companion object {
+        // Factory for MainViewModel that takes Preferences as a dependency
+        fun provideFactory(prefs: Prefs?) = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return MainViewModel(prefs) as T
+            }
+        }
     }
 }
