@@ -1,6 +1,7 @@
 package com.handysparksoft.groupsgenerator.ui.screens.detail
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.activity.compose.BackHandler
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -62,6 +63,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun DetailScreen(viewModel: DetailViewModel, onUpClick: () -> Unit, onGenerateClick: () -> Unit) {
     val participants: List<Participant> = viewModel.participants
+
+    BackHandler(onBack = onUpClick)
 
     DetailScreenScaffold(viewModel = viewModel, onUpClick = onUpClick) { padding ->
         ParticipantsList(

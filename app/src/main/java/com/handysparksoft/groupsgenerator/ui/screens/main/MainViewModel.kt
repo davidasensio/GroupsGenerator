@@ -30,8 +30,6 @@ class MainViewModel(private val prefs: Prefs?) : ViewModel() {
         loadSavedLists()
     }
 
-    fun getLists() = aLists.toList()
-
     private fun setLists(theLists: List<AList>) {
         aLists.clear()
         aLists.addAll(theLists)
