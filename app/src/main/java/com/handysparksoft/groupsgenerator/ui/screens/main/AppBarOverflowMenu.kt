@@ -1,6 +1,7 @@
 package com.handysparksoft.groupsgenerator.ui.screens.main
 
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.ExperimentalMaterialApi
@@ -59,7 +60,7 @@ fun AppBarOverflowMenu(
                                 contentDescription = "Share"
                             )
                         },
-                        // modifier = Modifier.defaultMinSize(140.dp)
+                        modifier = Modifier.requiredWidth(150.dp)
                     )
                 }
                 DropdownMenuItem(onClick = onRateClick) {
