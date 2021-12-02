@@ -20,7 +20,7 @@ open class Prefs(context: Context) {
         }
 
     companion object {
-        private const val PREFS_NAME = "groups_generator"
+        const val PREFS_NAME = "groups_generator"
         private const val A_LISTS_KEY = "aLists"
     }
 }
