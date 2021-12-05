@@ -57,7 +57,6 @@ import com.handysparksoft.groupsgenerator.model.Participant
 import com.handysparksoft.groupsgenerator.model.ParticipantTypeIcon
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 import com.handysparksoft.groupsgenerator.ui.shared.BackToTopButton
-import java.util.UUID as UniqueIdentifier
 import kotlinx.coroutines.launch
 
 @Composable
@@ -69,7 +68,7 @@ fun DetailScreen(viewModel: DetailViewModel, onUpClick: () -> Unit, onGenerateCl
     DetailScreenScaffold(viewModel = viewModel, onUpClick = onUpClick) { padding ->
         ParticipantsList(
             participants = participants,
-            onAddParticipant = { viewModel.addParticipant(it) },
+            onAddParticipant = { name, icon -> viewModel.addParticipants(name, icon) },
             onRemoveParticipant = { viewModel.removeParticipant(it) },
             currentEditingParticipant = viewModel.currentEditParticipant,
             onStartEdit = { viewModel.onEditParticipantSelected(it) },
@@ -84,7 +83,7 @@ fun DetailScreen(viewModel: DetailViewModel, onUpClick: () -> Unit, onGenerateCl
 @Composable
 private fun ParticipantsList(
     participants: List<Participant>,
-    onAddParticipant: (Participant) -> Unit,
+    onAddParticipant: (name: String, icon: ParticipantTypeIcon) -> Unit,
     onRemoveParticipant: (Participant) -> Unit,
     currentEditingParticipant: Participant?,
     onStartEdit: (Participant) -> Unit,
@@ -126,26 +125,31 @@ private fun ParticipantsList(
 }
 
 @Composable
-private fun ParticipantInputHeader(onAddParticipant: (Participant) -> Unit) {
+private fun ParticipantInputHeader(
+    onAddParticipant: (name: String, icon: ParticipantTypeIcon) -> Unit
+) {
     Column {
         ParticipantEntryItemInput(onAddParticipant)
     }
 }
 
 @Composable
-private fun ParticipantEntryItemInput(onAddParticipant: (Participant) -> Unit) {
+private fun ParticipantEntryItemInput(
+    onAddParticipant: (name: String, icon: ParticipantTypeIcon) -> Unit
+) {
     val (text, setText) = rememberSaveable { mutableStateOf("") }
     val (icon, setIcon) = remember { mutableStateOf(ParticipantTypeIcon.Default) }
     val iconsVisible = text.isNotBlank()
     val submit = {
         onAddParticipant(
-            Participant(
+            text, icon
+           /* Participant(
                 id = UniqueIdentifier.randomUUID().toString(),
                 name = text,
                 icon = icon,
                 isCouple = icon == ParticipantTypeIcon.Couple,
                 isDeactivated = icon == ParticipantTypeIcon.Deactivated
-            )
+            )*/
         )
         setIcon(ParticipantTypeIcon.Default)
         setText("")
