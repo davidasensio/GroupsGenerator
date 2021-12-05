@@ -12,7 +12,7 @@ import com.handysparksoft.groupsgenerator.ui.shared.ArrowBackIcon
 @Composable
 fun GenerateScreenScaffold(
     onUpClick: () -> Unit,
-    onCopyGroupsClick: () -> Unit,
+    onCopyGroupsClick: (copiedMessage: String) -> Unit,
     onShareGeneratedGroupsClick: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ) {

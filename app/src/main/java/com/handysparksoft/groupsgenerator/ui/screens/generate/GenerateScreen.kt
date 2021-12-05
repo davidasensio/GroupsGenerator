@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.res.Resources
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -116,15 +115,14 @@ fun GenerateScreen(
 
     GenerateScreenScaffold(
         onUpClick = onUpClick,
-        onCopyGroupsClick = {
-            val copiedToast = Resources.getSystem().getString(R.string.generate_copied_to_clipboard)
+        onCopyGroupsClick = { copiedMessage ->
 
             if (viewModel.generatedGroups.isNotEmpty()) {
                 val clipboard =
                     context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val clip = ClipData.newPlainText("generated_groups", viewModel.getContent())
                 clipboard.setPrimaryClip(clip)
-                Toast.makeText(context, copiedToast, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, copiedMessage, Toast.LENGTH_SHORT).show()
             }
         },
         onShareGeneratedGroupsClick = {

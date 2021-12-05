@@ -10,12 +10,13 @@ import com.handysparksoft.groupsgenerator.ui.shared.AppBarAction
 
 @Composable
 fun GenerateAppBarOverflowMenu(
-    onCopyGroupsClick: () -> Unit,
+    onCopyGroupsClick: (copiedMessage: String) -> Unit,
     onShareGeneratedGroupsClick: () -> Unit
 ) {
+    val copiedMessage = stringResource(id = R.string.generate_copied_to_clipboard)
     AppBarAction(
         imageVector = Icons.Default.ContentCopy,
-        onClick = onCopyGroupsClick,
+        onClick = { onCopyGroupsClick(copiedMessage) },
         contentDescription = stringResource(R.string.generate_copy_groups)
     )
     AppBarAction(
