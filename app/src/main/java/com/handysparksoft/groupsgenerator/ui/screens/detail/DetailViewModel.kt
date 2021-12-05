@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import com.handysparksoft.groupsgenerator.App
 import com.handysparksoft.groupsgenerator.model.AList
 import com.handysparksoft.groupsgenerator.model.Participant
+import com.handysparksoft.groupsgenerator.model.ParticipantTypeIcon
+import java.util.UUID as UniqueIdentifier
 
 class DetailViewModel : ViewModel() {
 
@@ -18,14 +20,6 @@ class DetailViewModel : ViewModel() {
             field = value
             selectAList()
         }
-
-    private fun selectAList() {
-        App.prefs?.aLists?.firstOrNull { it.id == aListId }?.let {
-            aList = it
-            participants.clear()
-            participants.addAll(aList.participants)
-        }
-    }
 
     val listName: String
         get() = if (::aList.isInitialized) {
@@ -40,10 +34,32 @@ class DetailViewModel : ViewModel() {
         get() = participants.getOrNull(currentEditPosition)
 
     private var orderAsc = true
+    private fun selectAList() {
+        App.prefs?.aLists?.firstOrNull { it.id == aListId }?.let {
+            aList = it
+            participants.clear()
+            participants.addAll(aList.participants)
+        }
+    }
+
+    fun addParticipants(names: String, icon: ParticipantTypeIcon) {
+        val inputNames = names.split(BREAK_LINE)
+        inputNames.forEach { itemName ->
+            addParticipant(
+                Participant(
+                    id = UniqueIdentifier.randomUUID().toString(),
+                    name = itemName,
+                    icon = icon,
+                    isCouple = icon == ParticipantTypeIcon.Couple,
+                    isDeactivated = icon == ParticipantTypeIcon.Deactivated
+                )
+            )
+        }
+        saveToPrefs()
+    }
 
     fun addParticipant(participant: Participant) {
         participants.add(participant)
-        saveToPrefs()
     }
 
     fun removeParticipant(participant: Participant) {
@@ -86,5 +102,9 @@ class DetailViewModel : ViewModel() {
             App.prefs?.aLists = newLists
             selectAList()
         }
+    }
+
+    companion object {
+        private const val BREAK_LINE = "\n"
     }
 }
