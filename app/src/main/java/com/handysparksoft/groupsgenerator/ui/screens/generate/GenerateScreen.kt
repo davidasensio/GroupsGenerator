@@ -57,8 +57,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.model.Participant
+import com.handysparksoft.groupsgenerator.platform.InAppReviewManager
 import com.handysparksoft.groupsgenerator.platform.ShareIntentHandler
 import com.handysparksoft.groupsgenerator.ui.GroupsGeneratorApp
 import com.handysparksoft.groupsgenerator.ui.shared.DropdownField
@@ -68,6 +70,7 @@ import com.handysparksoft.groupsgenerator.ui.theme.GroupHeader
 import com.handysparksoft.groupsgenerator.ui.theme.GroupHeaderDark
 import kotlin.math.max
 import kotlin.math.roundToInt
+import kotlin.random.Random
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
 @Composable
@@ -92,6 +95,8 @@ fun GenerateScreen(
             mode = options.indexOf(selectedOptionText),
             elementsNumber = elementsNumber
         )
+
+        startInAppReviewFlow(context)
     }
 
     val listState = rememberLazyListState(0)
@@ -210,6 +215,16 @@ fun GenerateScreen(
                     }
                 }
             }
+        }
+    }
+}
+
+fun startInAppReviewFlow(context: Context) {
+    // InAppReview request
+    val askForAReview = Random.nextInt(10) == 1
+    if (askForAReview) {
+        (context as? Activity)?.let { activity ->
+            InAppReviewManager(ReviewManagerFactory.create(context)).requestReviewFlow(activity)
         }
     }
 }
