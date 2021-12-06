@@ -3,6 +3,16 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+// Create a variable called keystorePropertiesFile, and initialize it to your keystore.properties file, in the rootProject folder.
+// And load the properties
+def keystorePropertiesFile = rootProject.file("./keystore/keystore_new/keystore_pkcs12.properties")
+def keystoreProperties = new Properties()
+try {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+} catch (Exception e) {
+    println("WARNING! Keystore files not found! KeystoreProperties couldn't be loaded")
+}
+
 android {
     compileSdk 31
 
@@ -19,10 +29,24 @@ android {
         }
     }
 
+    signingConfigs {
+        config {
+            try {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            } catch (Exception e) {
+                println("WARNING! KeystoreProperties are not loaded!")
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
