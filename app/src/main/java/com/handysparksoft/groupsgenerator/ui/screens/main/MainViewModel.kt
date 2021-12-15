@@ -25,6 +25,7 @@ class MainViewModel(private val prefs: Prefs?) : ViewModel() {
     var showDeleteConfirmDialog = mutableStateOf(false)
     var showEmptyView = derivedStateOf { aLists.isEmpty() }
     private var orderAsc = true
+    private var orderNumAsc = true
 
     init {
         loadSavedLists()
@@ -81,6 +82,15 @@ class MainViewModel(private val prefs: Prefs?) : ViewModel() {
             aLists.sortByDescending { it.name }
         }
         orderAsc = !orderAsc
+    }
+
+    fun sortNumerically() {
+        if (orderNumAsc) {
+            aLists.sortBy { it.participants.size }
+        } else {
+            aLists.sortByDescending { it.participants.size }
+        }
+        orderNumAsc = !orderNumAsc
     }
 
     private fun saveToPrefs() {

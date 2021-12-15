@@ -34,65 +34,14 @@ fun MainScreen(
     viewModel: MainViewModel,
     onAListClick: (AList) -> Unit,
     onCreateClick: () -> Unit,
+    onSortClick: () -> Unit
 ) {
-    val listState = rememberLazyListState()
-    viewModel.currentListPosition = listState.firstVisibleItemIndex
-
-    MainScreenScaffold(viewModel = viewModel, onCreateClick = onCreateClick) { padding ->
-        Column {
-            LazyColumn(
-                state = listState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding)
-                    .weight(1f),
-                contentPadding = PaddingValues(24.dp),
-                verticalArrangement = Arrangement.spacedBy(24.dp)
-            ) {
-                items(viewModel.aLists, key = { it.id }) { aList ->
-                    val (selected, setSelected) = rememberSaveable(aList.id) {
-                        mutableStateOf(false)
-                    }
-                    AListItem(
-                        aList = aList,
-                        selected = selected,
-                        onSelectedChange = { isSelected ->
-                            setSelected(isSelected)
-                            viewModel.addListToSelection(aList.id)
-                        },
-                        onClick = {
-                            if (selected) {
-                                setSelected(false)
-                                viewModel.removeListFromSelection(aList.id)
-                            } else {
-                                viewModel.clearSelection()
-                                onAListClick(aList)
-                            }
-                        }
-                    )
-                }
-            }
-
-            AnimatedVisibility(
-                visible = viewModel.showEmptyView.value,
-                modifier = Modifier
-                    .align(CenterHorizontally)
-                    .padding(bottom = 36.dp, end = 100.dp)
-            ) {
-                Column {
-                    Text(
-                        text = stringResource(R.string.main_create_your_first_list),
-                        style = MaterialTheme.typography.h6,
-                        color = MaterialTheme.colors.secondary.copy(alpha = 0.8f)
-                    )
-                    Image(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_hand_arrow),
-                        contentDescription = null,
-                        modifier = Modifier.padding(top = 16.dp)
-                    )
-                }
-            }
-        }
+    MainScreenScaffold(
+        viewModel = viewModel,
+        onCreateClick = onCreateClick,
+        onSortClick = onSortClick
+    ) { padding ->
+        MainScreenContent(padding, viewModel, onAListClick)
 
         if (viewModel.showDeleteConfirmDialog.value) {
             ConfirmDialog(
@@ -107,6 +56,71 @@ fun MainScreen(
     }
 }
 
+@Composable
+private fun MainScreenContent(
+    padding: PaddingValues,
+    viewModel: MainViewModel,
+    onAListClick: (AList) -> Unit
+) {
+    val listState = rememberLazyListState()
+    viewModel.currentListPosition = listState.firstVisibleItemIndex
+
+    Column {
+        LazyColumn(
+            state = listState,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .weight(1f),
+            contentPadding = PaddingValues(24.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            items(viewModel.aLists, key = { it.id }) { aList ->
+                val (selected, setSelected) = rememberSaveable(aList.id) {
+                    mutableStateOf(false)
+                }
+                AListItem(
+                    aList = aList,
+                    selected = selected,
+                    onSelectedChange = { isSelected ->
+                        setSelected(isSelected)
+                        viewModel.addListToSelection(aList.id)
+                    },
+                    onClick = {
+                        if (selected) {
+                            setSelected(false)
+                            viewModel.removeListFromSelection(aList.id)
+                        } else {
+                            viewModel.clearSelection()
+                            onAListClick(aList)
+                        }
+                    }
+                )
+            }
+        }
+
+        AnimatedVisibility(
+            visible = viewModel.showEmptyView.value,
+            modifier = Modifier
+                .align(CenterHorizontally)
+                .padding(bottom = 36.dp, end = 100.dp)
+        ) {
+            Column {
+                Text(
+                    text = stringResource(R.string.main_create_your_first_list),
+                    style = MaterialTheme.typography.h6,
+                    color = MaterialTheme.colors.secondary.copy(alpha = 0.8f)
+                )
+                Image(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_hand_arrow),
+                    contentDescription = null,
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun MainScreenPreview() {
@@ -114,7 +128,8 @@ fun MainScreenPreview() {
         MainScreen(
             viewModel = MainViewModel(Prefs(LocalContext.current)),
             onAListClick = {},
-            onCreateClick = {}
+            onCreateClick = {},
+            onSortClick = {}
         )
     }
 }

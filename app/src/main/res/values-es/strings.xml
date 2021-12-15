@@ -61,4 +61,8 @@
     <string name="generate_copied_to_clipboard">Grupos copiados al portapapeles</string>
     <string name="generate_mode_label">Mode de generación</string>
     <string name="generate_group_title">- Grupo %1$d -</string>
+
+    <string name="main_sort_by">Ordenar elementos por</string>
+    <string name="main_sort_by_alpha">Nombre (alfabéticamente)</string>
+    <string name="main_sort_by_elements">Número de elementos</string>
 </resources>
