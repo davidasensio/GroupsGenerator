@@ -15,17 +15,17 @@ class MainViewModel(private val prefs: Prefs?) : ViewModel() {
     var selectedALists = mutableStateListOf<String>()
         private set
 
-    var fabTextShown = true
+    var fabTextShown = mutableStateOf(true)
     var currentListPosition = 0
         set(value) {
-            fabTextShown = value == 0 || value < currentListPosition
+            fabTextShown.value = value == 0 || value < currentListPosition
             field = value
         }
     var toolbarDeleteOptionShown = mutableStateOf(false)
     var showDeleteConfirmDialog = mutableStateOf(false)
     var showEmptyView = derivedStateOf { aLists.isEmpty() }
-    private var orderAsc = true
-    private var orderNumAsc = true
+    private var orderNamesAsc = true
+    private var orderNumAsc = false
 
     init {
         loadSavedLists()
@@ -76,12 +76,12 @@ class MainViewModel(private val prefs: Prefs?) : ViewModel() {
     }
 
     fun sortAlphabetically() {
-        if (orderAsc) {
+        if (orderNamesAsc) {
             aLists.sortBy { it.name }
         } else {
             aLists.sortByDescending { it.name }
         }
-        orderAsc = !orderAsc
+        orderNamesAsc = !orderNamesAsc
     }
 
     fun sortNumerically() {

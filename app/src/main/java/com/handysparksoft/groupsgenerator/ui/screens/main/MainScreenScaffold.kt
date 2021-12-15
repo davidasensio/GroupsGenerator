@@ -62,7 +62,7 @@ fun MainScreenScaffold(
                         imageVector = Icons.Default.Add,
                         contentDescription = stringResource(R.string.main_add_new_list),
                     )
-                    AnimatedVisibility(visible = viewModel.fabTextShown) {
+                    AnimatedVisibility(visible = viewModel.fabTextShown.value) {
                         Text(text = stringResource(R.string.main_add_new_list))
                     }
                 }
