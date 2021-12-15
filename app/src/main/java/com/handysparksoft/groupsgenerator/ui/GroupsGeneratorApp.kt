@@ -35,7 +35,8 @@ fun GroupsGeneratorPreview() {
             MainScreen(
                 MainViewModel(Prefs(LocalContext.current)),
                 onAListClick = {},
-                onCreateClick = {}
+                onCreateClick = {},
+                onSortClick = {}
             )
         }
     }

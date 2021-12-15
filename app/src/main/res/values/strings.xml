@@ -60,4 +60,8 @@
     <string name="generate_copied_to_clipboard">Groups copied to clipboard</string>
     <string name="generate_mode_label">Generation mode</string>
     <string name="generate_group_title">- Group %1$d -</string>
+
+    <string name="main_sort_by">Sort elements by</string>
+    <string name="main_sort_by_alpha">Name (alphabetically)</string>
+    <string name="main_sort_by_elements">Number of elements</string>
 </resources>
