@@ -140,20 +140,25 @@ private fun ParticipantEntryItemInput(
     val (text, setText) = rememberSaveable { mutableStateOf("") }
     val (icon, setIcon) = remember { mutableStateOf(ParticipantTypeIcon.Default) }
     val iconsVisible = text.isNotBlank()
+    val iconAlreadyAutoCorrected = remember { mutableStateOf(false) }
+    val andConnectors = listOf(" y ", " e ", " i ", " and ", "und", "et", " & ", " + ", " - ")
+    val textIsReferringToACouple = text.lowercase().findAnyOf(andConnectors) != null
+
     val submit = {
-        onAddParticipant(
-            text, icon
-           /* Participant(
-                id = UniqueIdentifier.randomUUID().toString(),
-                name = text,
-                icon = icon,
-                isCouple = icon == ParticipantTypeIcon.Couple,
-                isDeactivated = icon == ParticipantTypeIcon.Deactivated
-            )*/
-        )
+        onAddParticipant(text, icon)
+        iconAlreadyAutoCorrected.value = false
         setIcon(ParticipantTypeIcon.Default)
         setText("")
     }
+
+    if (!iconAlreadyAutoCorrected.value &&
+        icon == ParticipantTypeIcon.Default &&
+        textIsReferringToACouple
+    ) {
+        setIcon(ParticipantTypeIcon.Couple)
+        iconAlreadyAutoCorrected.value = true
+    }
+
     ParticipantItemInput(
         text = text,
         onTextChange = setText,
