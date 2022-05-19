@@ -68,7 +68,10 @@ class GenerateViewModel : ViewModel() {
             if (addWidowedToNewGroup) {
                 generatedGroups.add(currentGroup)
             } else {
-                generatedGroups.last().addAll(currentGroup)
+                // Distribute remaining participant through all groups
+                currentGroup.forEachIndexed { index, participant ->
+                    generatedGroups[index % generatedGroups.size].add(participant)
+                }
             }
         }
     }

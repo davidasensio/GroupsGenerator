@@ -219,9 +219,9 @@ fun GenerateScreen(
     }
 }
 
-fun startInAppReviewFlow(context: Context) {
+private fun startInAppReviewFlow(context: Context) {
     // InAppReview request
-    val askForAReview = Random.nextInt(10) == 1
+    val askForAReview = Random.nextInt(3) == 1
     if (askForAReview) {
         (context as? Activity)?.let { activity ->
             InAppReviewManager(ReviewManagerFactory.create(context)).requestReviewFlow(activity)
