@@ -1,13 +1,11 @@
 package com.handysparksoft.groupsgenerator.ui.screens.main
 
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.handysparksoft.groupsgenerator.R
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainAppBar(
     anySelected: Boolean,

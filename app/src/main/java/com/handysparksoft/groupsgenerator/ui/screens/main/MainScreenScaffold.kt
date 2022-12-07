@@ -5,7 +5,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -22,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.platform.ShareIntentHandler
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainScreenScaffold(
     viewModel: MainViewModel,
