@@ -101,7 +101,8 @@ class MainViewModel(private val prefs: Prefs?) : ViewModel() {
         // Factory for MainViewModel that takes Preferences as a dependency
         fun provideFactory(prefs: Prefs?) = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return MainViewModel(prefs) as T
             }
         }
