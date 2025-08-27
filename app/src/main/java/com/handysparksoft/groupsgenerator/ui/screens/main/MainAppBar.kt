@@ -1,8 +1,10 @@
 package com.handysparksoft.groupsgenerator.ui.screens.main
 
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.handysparksoft.groupsgenerator.R
 
@@ -15,6 +17,7 @@ fun MainAppBar(
     onRateClick: () -> Unit
 ) {
     TopAppBar(
+        modifier = Modifier.statusBarsPadding(),
         title = { Text(text = stringResource(id = R.string.app_name)) },
         actions = {
             AppBarOverflowMenu(
