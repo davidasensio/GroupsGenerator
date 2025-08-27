@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.handysparksoft.groupsgenerator">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:backupAgent=".platform.PrefsBackupAgent"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher_group"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_group_round"
