@@ -117,6 +117,7 @@ private fun NavGraphBuilder.composable(
     }
 }
 
+@Suppress("DEPRECATION")
 private inline fun <reified T> NavBackStackEntry.findArg(key: String): T {
     val value = arguments?.get(key)
     requireNotNull(value = value)

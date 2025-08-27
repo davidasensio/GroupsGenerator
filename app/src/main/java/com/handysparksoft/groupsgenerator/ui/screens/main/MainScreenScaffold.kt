@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -53,8 +52,10 @@ fun MainScreenScaffold(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onCreateClick,
-                modifier = Modifier.navigationBarsPadding()) {
+            FloatingActionButton(
+                onClick = onCreateClick,
+                modifier = Modifier.navigationBarsPadding()
+            ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(horizontal = 16.dp)

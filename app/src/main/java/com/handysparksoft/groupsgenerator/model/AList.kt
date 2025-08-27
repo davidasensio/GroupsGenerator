@@ -1,6 +1,5 @@
 package com.handysparksoft.groupsgenerator.model
 
-import androidx.annotation.DrawableRes
 import com.handysparksoft.groupsgenerator.R
 import com.handysparksoft.groupsgenerator.model.AList.Type.Normal
 import java.io.Serializable
@@ -11,7 +10,7 @@ data class AList(
     val description: String = "",
     val participants: List<Participant> = emptyList(),
     val type: Type = Normal,
-    @DrawableRes val image: Int = R.drawable.il_team_work
+    val image: Int = R.drawable.il_team_work
 ) : Serializable {
     enum class Type { Normal, Special }
 
