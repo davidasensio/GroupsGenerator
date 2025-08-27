@@ -21,3 +21,12 @@
 #-renamesourcefileattribute SourceFile
 
 -keepclassmembers enum com.handysparksoft.groupsgenerator.** { *; }
+-keep class com.google.gson.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*
+
+# Keep Compose classes
+-keep class androidx.compose.** { *; }
+-keep class androidx.activity.** { *; }
+-keep class androidx.navigation.** { *; }
+
